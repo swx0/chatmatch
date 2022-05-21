@@ -4,12 +4,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-
+import { MenuProvider } from 'react-native-popup-menu';
 import { Amplify } from 'aws-amplify'
 import awsconfig from './src/aws-exports'
+import { withAuthenticator } from 'aws-amplify-react-native'
 Amplify.configure(awsconfig)
 
-export default function App() {
+function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -18,9 +19,14 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <MenuProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </MenuProvider>
       </SafeAreaProvider>
     );
   }
 }
+
+export default withAuthenticator(App)
+

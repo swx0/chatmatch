@@ -10,6 +10,11 @@
       "StackName": "amplify-matchmakingapp-dev-191047",
       "StackId": "arn:aws:cloudformation:us-east-1:719835962833:stack/amplify-matchmakingapp-dev-191047/ac3c9a50-d8f6-11ec-9c67-12bd40e2e9c9",
       "AmplifyAppId": "dqe63dkcv4d7j"
+    },
+    "categories": {
+      "auth": {
+        "matchmakingappc55697b2": {}
+      }
     }
   }
 }
