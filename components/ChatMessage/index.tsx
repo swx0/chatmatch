@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Message } from "../../types";
-import { format } from 'date-fns';
 
 export type ChatMessageProps = {
     message: Message;

@@ -16,7 +16,7 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
     const index = Math.floor(Math.random() * (max - min + 1)) + min;
     const userData = generated[index]; 
     setCurrId(userData._id);
-    console.log(userData._id);
+    console.log(userData.name);
     navigation.navigate('ChatRoom', { id: userData._id, name: userData.name})
   }
 
