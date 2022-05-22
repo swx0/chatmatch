@@ -63,7 +63,6 @@ export type User = {
   imageUri?: string | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type UpdateUserInput = {
@@ -120,7 +119,6 @@ export type CreateUserMutation = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -137,7 +135,6 @@ export type UpdateUserMutation = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -154,7 +151,6 @@ export type DeleteUserMutation = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -170,7 +166,6 @@ export type GetUserQuery = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -190,14 +185,9 @@ export type ListUsersQuery = {
       imageUri?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
-};
-
-export type OnCreateUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateUserSubscription = {
@@ -208,12 +198,7 @@ export type OnCreateUserSubscription = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
@@ -224,12 +209,7 @@ export type OnUpdateUserSubscription = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteUserSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteUserSubscription = {
@@ -240,6 +220,5 @@ export type OnDeleteUserSubscription = {
     imageUri?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };

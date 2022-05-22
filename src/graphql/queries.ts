@@ -10,7 +10,6 @@ export const getUser = /* GraphQL */ `
       imageUri
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -27,7 +26,6 @@ export const listUsers = /* GraphQL */ `
         imageUri
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

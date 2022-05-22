@@ -13,7 +13,6 @@ export const createUser = /* GraphQL */ `
       imageUri
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -28,7 +27,6 @@ export const updateUser = /* GraphQL */ `
       imageUri
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -43,7 +41,6 @@ export const deleteUser = /* GraphQL */ `
       imageUri
       createdAt
       updatedAt
-      owner
     }
   }
 `;

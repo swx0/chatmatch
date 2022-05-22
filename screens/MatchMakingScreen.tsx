@@ -3,26 +3,43 @@ import { Pressable, StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import generated from '../data/generated'
 import Colors from '../constants/Colors';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import Users from '../data/Users';
+import { listUsers } from '../src/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify';
 
 export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'MatchMaking'>) {
+
+  // List of all registered users
+  const [userList, setUserList] = useState([]);
+
+  useEffect( () => {
+    const fetchUsers = async () => {
+      try {
+        const usersData = await API.graphql(graphqlOperation(listUsers));
+        setUserList(usersData.data.listUsers.items);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchUsers();
+  }, []);
 
   const onPress = () => {
     // Choose random user to chat with
     const min = 0
-    const max = Users.length - 1 
+    const max = userList.length - 1 
     const index = Math.floor(Math.random() * (max - min + 1)) + min;
-    const userData = Users[index]; 
-    setCurrId(userData.id); 
-    console.log(userData.name);
-    navigation.navigate('ChatRoom', { id: userData.id, name: userData.name})
+    const user = userList[index]; 
+
+    console.log(userList);
+    setCurrId(user.id); 
+    console.log(user.name);
+    navigation.navigate('ChatRoom', { id: user.id, name: user.name})
   }
 
-  const [currId, setCurrId] = React.useState(Users[0].id);
+  const [currId, setCurrId] = React.useState();
 
   return (
     <View style={styles.container}>
