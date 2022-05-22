@@ -7,20 +7,22 @@ import generated from '../data/generated'
 import Colors from '../constants/Colors';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import Users from '../data/Users';
 
 export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'MatchMaking'>) {
 
   const onPress = () => {
+    // Choose random user to chat with
     const min = 0
-    const max = generated.length - 1 
+    const max = Users.length - 1 
     const index = Math.floor(Math.random() * (max - min + 1)) + min;
-    const userData = generated[index]; 
-    setCurrId(userData._id);
+    const userData = Users[index]; 
+    setCurrId(userData.id); 
     console.log(userData.name);
-    navigation.navigate('ChatRoom', { id: userData._id, name: userData.name})
+    navigation.navigate('ChatRoom', { id: userData.id, name: userData.name})
   }
 
-  const [currId, setCurrId] = React.useState(generated[0]._id);
+  const [currId, setCurrId] = React.useState(Users[0].id);
 
   return (
     <View style={styles.container}>

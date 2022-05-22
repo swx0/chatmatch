@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "matchmakingapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\see_w\\Desktop\\orbital\\chat\\matchmaking-app\\amplify\\backend\\api\\matchmakingapp\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authmatchmakingappc55697b2"
+    }
+  }
+}
