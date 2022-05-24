@@ -11,7 +11,7 @@ type User @model @auth(rules: [{ allow: private }]) {
 }
 
 type ChatRoomUser 
-  @model 
+  @model
   @auth(rules: [{ allow: private }])
   # userID is primary key to search items in DB, chatRoomID is sort key
   @key(name: "byUser", fields:["userID", "chatRoomID"])
@@ -29,4 +29,22 @@ type ChatRoomUser
 type ChatRoom @model @auth(rules: [{ allow: private }]) {
   id: ID!
   chatRoomUserList: [ChatRoomUser] @connection(keyName:"byChatRoom", fields: ["id"])
+  messages: [Message] @connection(keyName:"byChatRoom", fields: ["id"])
 }
+
+type Message
+  @model 
+  @auth(rules: [{ allow: private }])
+  # Get message by chatRoomID and creation date
+  @key(name: "byChatRoom", fields: ["chatRoomID", "createdAt"], queryField: "messagesByChatRoomByCreatedAt") {
+    id: ID!
+    userID: ID!  # ID of user who sent the message
+    chatRoomID: ID! # chatRoomID where the message was sent
+    createdAt: String!
+    body: String! 
+    # Connect to User type, based on userID attribute
+    user: User @connection(fields: ["userID"])
+    # Connect to ChatRoom type, based on chatRoomID attribute
+    chatRoom: ChatRoom @connection(fields:["chatRoomID"])
+}
+

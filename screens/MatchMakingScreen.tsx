@@ -25,7 +25,7 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
         console.log(e);
       }
     }
-    fetchUsers();
+    fetchUsers(); 
   }, []);
 
   const onPress = async () => {
@@ -43,24 +43,27 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
     
     // Check if a ChatRoom with these 2 users already exists
 
-    // List of other users that are already in a ChatRoom with logged in user
+    // List of [chatRoomID, otherUserID], where other user is already in a ChatRoom with logged in user
     const otherUsersCRData = await API.graphql(graphqlOperation(getOtherUsers, { id: myUser.attributes.sub }));
     const otherUsersCR = otherUsersCRData.data.getUser.chatRoomUserList.items;
     const otherUsersCRList = otherUsersCR.map(userPair => userPair.chatRoom.chatRoomUserList.items[0].user.id === myUser.attributes.sub 
-                                                          ? userPair.chatRoom.chatRoomUserList.items[1].user.id 
-                                                          : userPair.chatRoom.chatRoomUserList.items[0].user.id);
+                                                          ? [userPair.chatRoom.chatRoomUserList.items[1].user.id, userPair.chatRoom.chatRoomUserList.items[1].chatRoomID] 
+                                                          : [userPair.chatRoom.chatRoomUserList.items[0].user.id, userPair.chatRoom.chatRoomUserList.items[0].chatRoomID]);
     console.log(otherUsersCRList);
 
     // List of ChatRoom associated with logged in user
     // const chatRoomListData = await API.graphql(graphqlOperation(getUser, { id: myUser.attributes.sub })); 
     
     // Directly enter existing ChatRoom (without creating new ChatRoom)
-    if (otherUsersCRList.includes(otherUser.id)) {
-      console.log("Chat Room already exists");
-      setCurrId(otherUser.id); 
-      console.log(otherUser.name);
-      navigation.navigate('ChatRoom', { id: newChatRoomID, name: otherUser.name});
-      return;
+    for (var i = 0; i < otherUsersCRList.length; i++) {
+      if (otherUsersCRList[i][0] === otherUser.id) {
+        console.log("Chat Room already exists");
+        setCurrId(otherUser.id); 
+        console.log(otherUser.name);
+        const oldChatRoomID = otherUsersCRList[i][1];
+        navigation.navigate('ChatRoom', { id: oldChatRoomID, name: otherUser.name});
+        return;
+      }
     }
 
     // Create a new ChatRoom

@@ -8,17 +8,17 @@ export type ChatMessageProps = {
 
 const ChatMessage = (props: ChatMessageProps) => {
     const message = props.message;
-    var dateTime = message.createdAt.valueOf();
+    const myUser = props.myUser;
+    var dateTime = message.user.createdAt.valueOf();
     var time = dateTime.split(/T|Z/)[1].slice(0,5);
-    var chatbox;
 
     // Check whether is my message 
-    const checkMyMessage = (message: Message) => message.user.id === 'u1';
+    const checkMyMessage = (message: Message) => message.user.id === myUser;
 
     return (
         <View>
             <View style={checkMyMessage(message) ? styles.myItem : styles.otherItem}>
-                <Text>{message.content}</Text>
+                <Text>{message.body}</Text>
                 <Text style={{textAlign:"right", color: "#868686"}}>{time}</Text>
             </View>
         </View>

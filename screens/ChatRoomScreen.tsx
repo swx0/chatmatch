@@ -3,32 +3,57 @@ import { Text, View } from '../components/Themed';
 
 import { useRoute } from '@react-navigation/native';
 import { FlatList, StyleSheet, TextInput, Pressable } from 'react-native';
-import SampleChat from '../data/SampleChat';
 import ChatMessage from '../components/ChatMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { createMessage } from '../src/graphql/mutations';
+import { getMessagesByChatRoom } from './queries';
+import { useIsFocused } from '@react-navigation/native';
 
 const ChatRoomScreen = () => {
 
+  const isFocused = useIsFocused();
   const route = useRoute();
 
-  //console.log(route.params)
+  //console.log(route.params);
 
   const [text, setText] = useState('');
+  const [myUser, setMyUser] = useState(null);
+  const [messages, setMessages] = useState([]);
 
-  const onPress = () => {
+  useEffect(() => {
+    if (isFocused) {
+      const getMyUser = async () => {
+        const myUserData = await Auth.currentAuthenticatedUser();
+        setMyUser(myUserData.attributes.sub);
+      };
+      getMyUser();
+
+      // Load messages for this ChatRoom
+      const getAllMessagesData = async () => {
+        // Customized query
+        const allMessagesData = await API.graphql(graphqlOperation(getMessagesByChatRoom, { chatRoomID: route.params.id }));
+        console.log(allMessagesData.data.messagesByChatRoomByCreatedAt.items); 
+        setMessages(allMessagesData.data.messagesByChatRoomByCreatedAt.items);
+      };
+      getAllMessagesData();
+    }
+  }, [isFocused]); 
+
+  // Send myUser's message
+  const onPress = async () => {
     console.log("sending message:" + text);
 
-    // Reset field
-    setText('');
+    await API.graphql(graphqlOperation(createMessage, { input: { userID: myUser, body: text, chatRoomID: route.params.id, } }))
+    setText(''); // Reset field
   };
 
   return (
     <View style={styles.container}>
       <FlatList 
-        data={SampleChat.messages}
-        renderItem={({ item }) => <ChatMessage message={item} />}
-        inverted
+        data={messages}
+        renderItem={({ item }) => <ChatMessage message={item} myUser={myUser}/>}
       />
       <View style={styles.inputContainer}>
         <TextInput 
