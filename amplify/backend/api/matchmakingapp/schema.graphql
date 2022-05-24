@@ -6,4 +6,27 @@ type User @model @auth(rules: [{ allow: private }]) {
   id: ID!
   name: String!
   imageUri: String
+  # List of ChatRoomUser type where the User is present in the ChatRoom
+  chatRoomUserList: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type ChatRoomUser 
+  @model 
+  @auth(rules: [{ allow: private }])
+  # userID is primary key to search items in DB, chatRoomID is sort key
+  @key(name: "byUser", fields:["userID", "chatRoomID"])
+  @key(name: "byChatRoom", fields:["chatRoomID", "userID"]) {
+    id: ID!
+    userID: ID!
+    chatRoomID: ID!
+    # Connect to User type, based on userID attribute
+    user: User @connection(fields: ["userID"])
+    # Connect to ChatRoom type, based on chatRoomID attribute
+    chatRoom: ChatRoom @connection(fields:["chatRoomID"])
+
+}
+
+type ChatRoom @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  chatRoomUserList: [ChatRoomUser] @connection(keyName:"byChatRoom", fields: ["id"])
 }
