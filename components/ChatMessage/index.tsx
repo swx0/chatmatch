@@ -9,7 +9,7 @@ export type ChatMessageProps = {
 const ChatMessage = (props: ChatMessageProps) => {
     const message = props.message;
     const myUser = props.myUser;
-    var dateTime = message.user.createdAt.valueOf();
+    var dateTime = message.createdAt.valueOf();
     var time = dateTime.split(/T|Z/)[1].slice(0,5);
 
     // Check whether is my message 

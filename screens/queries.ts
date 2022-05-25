@@ -40,10 +40,10 @@ export const getMessagesByChatRoom = /* GraphQL */ `
     ) {
       items {
         body
+        createdAt
         user {
           id
-          name
-          createdAt
+          name 
         }
       }
     }
