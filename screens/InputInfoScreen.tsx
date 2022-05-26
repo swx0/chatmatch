@@ -63,6 +63,7 @@ export default function InputInfoScreen({ navigation }) {
             <Button
               title="enter"
               onPress={() => userMods=='' ? {} : navigation.navigate('List', {type: userType, mods: userMods.split(', ')})}
+		//to be added to database: userName, userYear, userType, userMods.split(', ')
             />
       </View>
     </SafeAreaView>
