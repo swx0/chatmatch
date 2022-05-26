@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 
 export default function InputInfoScreen({ navigation }) {
+  const [userName, setuserName] = useState('');
+  const [userYear, setuserYear] = useState('');
   const [userType, setType] = useState('');
   const [userMods, setuserMods] = useState('');
   
