@@ -108,6 +108,10 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
         style={({ pressed }) => [{opacity: pressed ? 0.5 : 1,}, styles.button]}>
         <Text style={styles.buttonText}>Randomize</Text>
       </Pressable>
+      <Button
+        title='edit profile'
+        onPress={() => navigation.navigate('InputInfo')} //doesn't work yet
+      />
     </View>
   );
 }
