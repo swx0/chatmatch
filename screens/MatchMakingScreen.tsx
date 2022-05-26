@@ -4,7 +4,7 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import Colors from '../constants/Colors';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getUser, listUsers } from '../src/graphql/queries';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
@@ -108,10 +108,6 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
         style={({ pressed }) => [{opacity: pressed ? 0.5 : 1,}, styles.button]}>
         <Text style={styles.buttonText}>Randomize</Text>
       </Pressable>
-      <Button
-        title='edit profile'
-        onPress={() => navigation.navigate('InputInfo')} //doesn't work yet
-      />
     </View>
   );
 }

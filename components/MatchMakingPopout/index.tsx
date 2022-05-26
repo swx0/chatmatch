@@ -7,6 +7,8 @@ import {
 import Colors from '../../constants/Colors';
 import { Entypo } from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
+import { RootTabScreenProps } from '../../types';
+
 
 async function signOut() {
     try {
@@ -16,7 +18,7 @@ async function signOut() {
     }
 }
 
-const MatchMakingPopout = () => {
+const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) => {
 
     const onSelect = (value: string) => {
         if (value === 'Settings') {

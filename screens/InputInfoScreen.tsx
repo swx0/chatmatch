@@ -12,15 +12,15 @@ export default function InputInfoScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1}}>
       <View style={styles.container}>
-        <Text style={{marginBottom: '20'}}>Hi, please input your info below!</Text>
+        <Text style={{marginBottom: 20, color: '#eee'}}>Hi, please input your info below!</Text>
 	<TextInput
 		value={userName}
 		onChangeText={(userName) => setuserName(userName)}
 		placeholder={'Name'}
 		style={styles.input}
 	/>
-	<View style={{flexDirection: 'row'}}>
-		<Text>which year are you in currently?    </Text>
+	<View style={{flexDirection: 'row', marginBottom: 20}}>
+		<Text style={{color: '#eee'}}>which year are you currently in?    </Text>
 		<Picker
 			selectedValue={userYear}
 			onValueChange={(itemValue, itemIndex) => setuserYear(itemValue)}>
@@ -31,7 +31,7 @@ export default function InputInfoScreen({ navigation }) {
 		</Picker>
 	</View>
 	<View style={{flexDirection: 'row'}}>
-		<Text>myers-briggs personality type:    </Text>
+		<Text style={{color: '#eee'}}>myers-briggs personality type?    </Text>
 		<Picker
 		    selectedValue={userType}
 		    onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
@@ -57,12 +57,12 @@ export default function InputInfoScreen({ navigation }) {
         <TextInput
               value={userMods}
               onChangeText={(userMods) => setuserMods(userMods)}
-              placeholder={'subjects e.g. math, science, english'}
+              placeholder={'mods taking e.g. cs1101s'}
               style={styles.input}
             />
             <Button
-              title="enter"
-              onPress={() => userMods=='' ? {} : navigation.navigate('List', {type: userType, mods: userMods.split(', ')})}
+              title="save"
+              onPress={() => userMods=='' ? alert('pls enter a subject') : navigation.navigate('List', {type: userType, mods: userMods.split(', ')})}
 		//to be added to database: userName, userYear, userType, userMods.split(', ')
             />
       </View>
@@ -74,8 +74,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      padding: '50',
-      backgroundColor: "#0aa",
+      backgroundColor: "#000",
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -83,8 +82,7 @@ const styles = StyleSheet.create({
         width: 250,
         height: 44,
         padding: 10,
-        marginTop: 20,
-        marginBottom: 10,
+		margin: 20,
         backgroundColor: '#e8e8e8'
       },
 });
