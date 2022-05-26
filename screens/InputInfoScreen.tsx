@@ -12,17 +12,10 @@ export default function InputInfoScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1}}>
       <View style={styles.container}>
-        <Text style={{marginBottom: 20, color: '#eee'}}>Hi, please input your info below!</Text>
-	<TextInput
-		value={userName}
-		onChangeText={(userName) => setuserName(userName)}
-		placeholder={'Name'}
-		style={styles.input}
-	/>
+        <Text style={{marginBottom: 20, color: '#000'}}>Hi, please input your info below!</Text>
 	<View style={{flexDirection: 'column', marginBottom: 20}}>
-		<Text style={{color: '#eee'}}>which year are you currently in?    </Text>
+		<Text style={{color: '#000'}}>which year are you currently in?    </Text>
 		<Picker
-			style={{color: '#eee'}}
 			selectedValue={userYear}
 			onValueChange={(itemValue, itemIndex) => setuserYear(itemValue)}>
 			<Picker.Item label='Y1' value='1' />
@@ -32,9 +25,8 @@ export default function InputInfoScreen({ navigation }) {
 		</Picker>
 	</View>
 	<View style={{flexDirection: 'column'}}>
-		<Text style={{color: '#eee'}}>myers-briggs personality type?    </Text>
+		<Text style={{color: '#000'}}>myers-briggs personality type?    </Text>
 		<Picker
-			style={{color: '#eee'}}
 		    selectedValue={userType}
 		    onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
 		    <Picker.Item label='INTP' value='INTP' />
@@ -76,7 +68,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
-      backgroundColor: "#000",
+      backgroundColor: "#eee",
       alignItems: 'center',
       justifyContent: 'center'
     },
