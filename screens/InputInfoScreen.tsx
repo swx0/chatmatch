@@ -2,13 +2,27 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View, SafeAreaView, TextInput, Button } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { updateUser } from '../src/graphql/mutations';
 
 export default function InputInfoScreen({ navigation }) {
-  const [userName, setuserName] = useState('');
-  const [userYear, setuserYear] = useState('');
-  const [userType, setType] = useState('');
+  const [userYear, setuserYear] = useState('Y1');
+  const [userType, setType] = useState('INTP');
   const [userMods, setuserMods] = useState('');
   
+  const typeList = ['INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ','ESTJ',
+  					'ESTP','ESFP','ESFJ','ENFP','ENFJ','ENTP','ENTJ'];
+
+  const onPress = async () => {
+	  if (userMods == '') {
+		alert('Indicate at least 1 module');
+	  } else {
+		const myUser = await Auth.currentAuthenticatedUser();
+		await API.graphql(graphqlOperation(updateUser, { input: { id: myUser.attributes.sub, modules: userMods, personalityType: userType, year: userYear } }));
+		return navigation.navigate('MatchMaking', {type: userType, mods: userMods.split(', ')});
+	  }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1}}>
       <View style={styles.container}>
@@ -29,36 +43,18 @@ export default function InputInfoScreen({ navigation }) {
 		<Picker
 		    selectedValue={userType}
 		    onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
-		    <Picker.Item label='INTP' value='INTP' />
-		    <Picker.Item label='INTJ' value='INTJ' />
-		    <Picker.Item label='INFP' value='INFP' />
-		    <Picker.Item label='INFJ' value='INFJ' />
-		    <Picker.Item label='ISTP' value='ISTP' />
-		    <Picker.Item label='ISTJ' value='ISTJ' />
-		    <Picker.Item label='ISFP' value='ISFP' />
-		    <Picker.Item label='ISFJ' value='ISFJ' />
-		    <Picker.Item label='ESTJ' value='ESTJ' />
-		    <Picker.Item label='ESTP' value='ESTP' />
-		    <Picker.Item label='ESFP' value='ESFP' />
-		    <Picker.Item label='ESFJ' value='ESFJ' />
-		    <Picker.Item label='ENFP' value='ENFP' />
-		    <Picker.Item label='ENFJ' value='ENFJ' />
-		    <Picker.Item label='ENTP' value='ENTP' />
-		    <Picker.Item label='ENTJ' value='ENTJ' />
-          	</Picker>
+			{typeList.map(type => <Picker.Item key="{type}" label={type} value={type}/>)}
+        </Picker>
 	</View>
 
         <TextInput
               value={userMods}
               onChangeText={(userMods) => setuserMods(userMods)}
               placeholder={'mods taking e.g. cs1101s'}
-              style={styles.input}
-            />
-            <Button
-              title="save"
-              onPress={() => userMods=='' ? alert('pls enter a subject') : navigation.navigate('List', {type: userType, mods: userMods.split(', ')})}
-		//to be added to database: userName, userYear, userType, userMods.split(', ')
-            />
+              style={styles.input} />
+        
+        <Button title="save" onPress={onPress} />
+		
       </View>
     </SafeAreaView>
   );

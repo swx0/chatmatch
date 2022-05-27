@@ -11,6 +11,9 @@ export const createUser = /* GraphQL */ `
       id
       name
       imageUri
+      year
+      personalityType
+      modules
       chatRoomUserList {
         items {
           id
@@ -35,6 +38,9 @@ export const updateUser = /* GraphQL */ `
       id
       name
       imageUri
+      year
+      personalityType
+      modules
       chatRoomUserList {
         items {
           id
@@ -59,6 +65,9 @@ export const deleteUser = /* GraphQL */ `
       id
       name
       imageUri
+      year
+      personalityType
+      modules
       chatRoomUserList {
         items {
           id
@@ -87,6 +96,9 @@ export const createChatRoomUser = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -122,6 +134,9 @@ export const updateChatRoomUser = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -157,6 +172,9 @@ export const deleteChatRoomUser = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -293,6 +311,9 @@ export const createMessage = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -329,6 +350,9 @@ export const updateMessage = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -365,6 +389,9 @@ export const deleteMessage = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }

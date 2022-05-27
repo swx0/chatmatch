@@ -6,11 +6,17 @@ export type CreateUserInput = {
   id?: string | null,
   name: string,
   imageUri?: string | null,
+  year?: string | null,
+  personalityType?: string | null,
+  modules?: string | null,
 };
 
 export type ModelUserConditionInput = {
   name?: ModelStringInput | null,
   imageUri?: ModelStringInput | null,
+  year?: ModelStringInput | null,
+  personalityType?: ModelStringInput | null,
+  modules?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -61,6 +67,9 @@ export type User = {
   id: string,
   name: string,
   imageUri?: string | null,
+  year?: string | null,
+  personalityType?: string | null,
+  modules?: string | null,
   chatRoomUserList?: ModelChatRoomUserConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -114,6 +123,9 @@ export type UpdateUserInput = {
   id: string,
   name?: string | null,
   imageUri?: string | null,
+  year?: string | null,
+  personalityType?: string | null,
+  modules?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -212,6 +224,9 @@ export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   imageUri?: ModelStringInput | null,
+  year?: ModelStringInput | null,
+  personalityType?: ModelStringInput | null,
+  modules?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -283,6 +298,9 @@ export type CreateUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -311,6 +329,9 @@ export type UpdateUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -339,6 +360,9 @@ export type DeleteUserMutation = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -372,6 +396,9 @@ export type CreateChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -414,6 +441,9 @@ export type UpdateChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -456,6 +486,9 @@ export type DeleteChatRoomUserMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -617,6 +650,9 @@ export type CreateMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -660,6 +696,9 @@ export type UpdateMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -703,6 +742,9 @@ export type DeleteMessageMutation = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -738,6 +780,9 @@ export type GetUserQuery = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -769,6 +814,9 @@ export type ListUsersQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -795,6 +843,9 @@ export type GetChatRoomUserQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -840,6 +891,9 @@ export type ListChatRoomUsersQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
+        year?: string | null,
+        personalityType?: string | null,
+        modules?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -938,6 +992,9 @@ export type GetMessageQuery = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -984,6 +1041,9 @@ export type ListMessagesQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
+        year?: string | null,
+        personalityType?: string | null,
+        modules?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1023,6 +1083,9 @@ export type MessagesByChatRoomByCreatedAtQuery = {
         id: string,
         name: string,
         imageUri?: string | null,
+        year?: string | null,
+        personalityType?: string | null,
+        modules?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1044,6 +1107,9 @@ export type OnCreateUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1067,6 +1133,9 @@ export type OnUpdateUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1090,6 +1159,9 @@ export type OnDeleteUserSubscription = {
     id: string,
     name: string,
     imageUri?: string | null,
+    year?: string | null,
+    personalityType?: string | null,
+    modules?: string | null,
     chatRoomUserList?:  {
       __typename: "ModelChatRoomUserConnection",
       items:  Array< {
@@ -1118,6 +1190,9 @@ export type OnCreateChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -1155,6 +1230,9 @@ export type OnUpdateChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -1192,6 +1270,9 @@ export type OnDeleteChatRoomUserSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -1333,6 +1414,9 @@ export type OnCreateMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -1371,6 +1455,9 @@ export type OnUpdateMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,
@@ -1409,6 +1496,9 @@ export type OnDeleteMessageSubscription = {
       id: string,
       name: string,
       imageUri?: string | null,
+      year?: string | null,
+      personalityType?: string | null,
+      modules?: string | null,
       chatRoomUserList?:  {
         __typename: "ModelChatRoomUserConnection",
         nextToken?: string | null,

@@ -8,6 +8,9 @@ export const getUser = /* GraphQL */ `
       id
       name
       imageUri
+      year
+      personalityType
+      modules
       chatRoomUserList {
         items {
           id
@@ -34,6 +37,9 @@ export const listUsers = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -54,6 +60,9 @@ export const getChatRoomUser = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -91,6 +100,9 @@ export const listChatRoomUsers = /* GraphQL */ `
           id
           name
           imageUri
+          year
+          personalityType
+          modules
           createdAt
           updatedAt
         }
@@ -170,6 +182,9 @@ export const getMessage = /* GraphQL */ `
         id
         name
         imageUri
+        year
+        personalityType
+        modules
         chatRoomUserList {
           nextToken
         }
@@ -208,6 +223,9 @@ export const listMessages = /* GraphQL */ `
           id
           name
           imageUri
+          year
+          personalityType
+          modules
           createdAt
           updatedAt
         }
@@ -249,6 +267,9 @@ export const messagesByChatRoomByCreatedAt = /* GraphQL */ `
           id
           name
           imageUri
+          year
+          personalityType
+          modules
           createdAt
           updatedAt
         }
