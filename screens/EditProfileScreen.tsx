@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View, SafeAreaView, TextInput, Button } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
-
+import Toast from 'react-native-root-toast';
 export default function InputInfoScreen({ navigation }) {
   const [userYear, setuserYear] = useState(''); //need to set useState to whatever the current info is
   const [userType, setType] = useState('');
@@ -59,9 +59,18 @@ export default function InputInfoScreen({ navigation }) {
 				</View>
 					<Button
 						title="save"
-						onPress={() => userMods=='' ? alert('Pls have at least 1 mod!') : {}/*navigation.navigate('List', {type: userType, mods: userMods.split(', ')})*/}
-						//to be added to database: userName, userYear, userType, userMods.split(', ')
-					/>
+						onPress={() => {
+							if (userMods=='') {
+								alert('Pls have at least 1 mod!');
+							} else {
+								//include updating of database here. userYear, userType, userMods.split(', ')
+								let toast = Toast.show('Profile saved!', {
+									backgroundColor: '#555',
+									shadow: true
+								});
+							}}
+						}
+					/>	
   		</View>
     </SafeAreaView>
   );
