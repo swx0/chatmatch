@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput, Button } from "react-n
 import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import Toast from 'react-native-root-toast';
+import modlist from '../assets/modlist-AY21_22.json';
+
 export default function InputInfoScreen({ navigation }) {
   const [userYear, setuserYear] = useState(''); //need to set useState to whatever the current info is
   const [userType, setType] = useState('');
@@ -51,23 +53,38 @@ export default function InputInfoScreen({ navigation }) {
 				<View style={styles.fields}>
 					<Text style={{textAlign: 'center'}}>What mods are you taking?</Text>
 					<TextInput
+						multiline={true}
+						textAlignVertical={'top'}
+						autoCapitalize={'characters'}
 						value={userMods}
 						onChangeText={(userMods) => setuserMods(userMods)}
-						placeholder={'e.g. cs1101s, ma2001'}
+						placeholder={'pls type in 1 mod per line\nCS1101S\nMA2001\netc....'}
 						style={styles.input}
 					/>
 				</View>
 					<Button
 						title="save"
 						onPress={() => {
+							let mods = userMods.split('\n');
+							let check = true;
 							if (userMods=='') {
 								alert('Pls have at least 1 mod!');
 							} else {
-								//include updating of database here. userYear, userType, userMods.split(', ')
-								let toast = Toast.show('Profile saved!', {
-									backgroundColor: '#555',
-									shadow: true
-								});
+								mods.forEach((item) => {
+									if (item.trim() !== '') {
+										check = check && modlist.includes(item);
+									}
+								})
+								
+								if (check) {
+									//include updating of database here. userYear(string), userType(string), mods(array)
+									let toast = Toast.show('Profile saved!', {
+										backgroundColor: '#555',
+										shadow: true
+									});
+								} else {
+									alert('pls check that all mods typed are correct\n\nModule codes can be found on nusmods.com')
+								}
 							}}
 						}
 					/>	
@@ -87,8 +104,9 @@ const styles = StyleSheet.create({
     },
     input: {
 			width: '100%',
-			height: 50,
-			padding: 10,
+			height: 100,
+			paddingLeft: 10,
+			paddingTop: 10,
       backgroundColor: '#e8e8e8'
     },
 		fields: {
