@@ -5,14 +5,13 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { MenuProvider } from 'react-native-popup-menu';
-import { API, graphqlOperation } from 'aws-amplify'
-import Amplify from '@aws-amplify/core';
-import Auth from '@aws-amplify/auth';
+import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 import { withAuthenticator } from 'aws-amplify-react-native'
 import { useEffect } from 'react';
 import { getUser } from './src/graphql/queries';
 import { createUser } from './src/graphql/mutations';
+import React from 'react';
 
 Amplify.configure(awsconfig);
 

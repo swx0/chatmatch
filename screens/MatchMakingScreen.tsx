@@ -10,6 +10,7 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
 
   // List of all registered users
   const [userList, setUserList] = useState(null);
+
   const [myUser, setMyUser] = useState(null);
 
 
@@ -27,8 +28,6 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
     };
     fetchUsers(); 
   }, []);
-
-
 
   return (userList && myUser ? <MatchList userList={userList} myUser={myUser} navigation={navigation}/>: <Text>Loading</Text>)
 };

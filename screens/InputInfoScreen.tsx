@@ -24,7 +24,7 @@ export default function InputInfoScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text style={{marginBottom: 20, color: '#000'}}>Hi, please input your info below!</Text>
 	<View style={{flexDirection: 'column', marginBottom: 20}}>
