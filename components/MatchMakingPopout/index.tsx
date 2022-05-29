@@ -38,8 +38,6 @@ const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) =>
             <MenuOptions>
                 <MenuOption value={'Settings'} text='Settings' />
                 <MenuOption value={'Sign out'} text='Sign out'/>
-                
-                <MenuOption value={3} disabled={true} text='Three' />
             </MenuOptions>
         </Menu>
 

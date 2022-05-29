@@ -26,31 +26,30 @@ export default function InputInfoScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text style={{marginBottom: 20, color: '#000'}}>Hi, please input your info below!</Text>
-	<View style={{flexDirection: 'column', marginBottom: 20}}>
-		<Text style={{color: '#000'}}>which year are you currently in?    </Text>
-		<Picker
-			selectedValue={userYear}
-			onValueChange={(itemValue, itemIndex) => setuserYear(itemValue)}>
-			<Picker.Item label='Y1' value='1' />
-			<Picker.Item label='Y2' value='2' />
-			<Picker.Item label='Y3' value='3' />
-			<Picker.Item label='Y4' value='4' />
-		</Picker>
-	</View>
-	<View style={{flexDirection: 'column'}}>
-		<Text style={{color: '#000'}}>myers-briggs personality type?    </Text>
-		<Picker
-		    selectedValue={userType}
-		    onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
-			{typeList.map(type => <Picker.Item key="{type}" label={type} value={type}/>)}
-        </Picker>
-	</View>
+        <View style={{flexDirection: 'column', marginBottom: 20}}>
+          <Text style={{color: '#000'}}>Which year are you currently in?    </Text>
+          <Picker
+            selectedValue={userYear}
+            onValueChange={(itemValue, itemIndex) => setuserYear(itemValue)}>
+            <Picker.Item label='Y1' value='1' />
+            <Picker.Item label='Y2' value='2' />
+            <Picker.Item label='Y3' value='3' />
+            <Picker.Item label='Y4' value='4' />
+          </Picker>
+        </View>
+        <View style={{flexDirection: 'column'}}>
+          <Text style={{color: '#000'}}>Myers-Briggs personality type?    </Text>
+          <Picker
+              selectedValue={userType}
+              onValueChange={(itemValue, itemIndex) => setType(itemValue)}>
+            {typeList.map(type => <Picker.Item key="{type}" label={type} value={type}/>)}
+              </Picker>
+        </View>
 
         <TextInput
               value={userMods}
               onChangeText={(userMods) => setuserMods(userMods)}
-              placeholder={'mods taking e.g. cs1101s'}
+              placeholder={'Modules currently taken e.g. cs1101s'}
               style={styles.input} />
         
         <Button title="save" onPress={onPress} />
@@ -69,10 +68,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     input: {
-        width: 250,
+        width: 270,
         height: 44,
         padding: 10,
-		margin: 20,
+		    margin: 20,
         backgroundColor: '#e8e8e8'
       },
 });
