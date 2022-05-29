@@ -21,6 +21,7 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import MatchMakingPopout from '../components/MatchMakingPopout';
+import InputInfoScreen from '../screens/InputInfoScreen';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -66,7 +67,8 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile'}}/>
+        <Stack.Screen name="InputInfo" component={InputInfoScreen} />
+        {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile'}}/> */}
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -104,7 +106,7 @@ function BottomTabNavigator() {
           headerRight: () => (
             <View style={{flexDirection: 'row', marginRight: 15}}>
               <Pressable
-                onPress={() => navigation.navigate('EditProfile')} //it was 'Modal' screen previously
+                onPress={() => navigation.navigate('InputInfo')} //it was 'Modal' screen previously
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}>
