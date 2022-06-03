@@ -27,10 +27,6 @@ export default function MatchList ({ myUser, userList, navigation }) {
         return null;
     }
 
-    // Check whether user has input details
-    if (myUserData.data.getUser.personalityType == null) {
-        return navigation.navigate('InputInfo');
-    }
 
     const myType = myUserData.data.getUser.personalityType;
     const myModsString = myUserData.data.getUser.modules;

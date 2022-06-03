@@ -8,7 +8,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 import { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 import { withAuthenticator } from 'aws-amplify-react-native'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUser } from './src/graphql/queries';
 import { createUser } from './src/graphql/mutations';
 import React from 'react';
@@ -18,6 +18,7 @@ Amplify.configure(awsconfig);
 
 function App() {
   const isLoadingComplete = useCachedResources();
+  const [userAdded, setUserAdded] = useState(null);
   const colorScheme = useColorScheme();
 
   // when App first renders
@@ -35,18 +36,23 @@ function App() {
         // Check if user is in db
         if (userDataDB.data.getUser) {
           console.log("User already registered")
+          setUserAdded(userDataDB.data.getUser);
           return;
         }
         
+        // Default list of modules, personality type and year of study as placeholders
         const newUser = {
           id: userDataAuth.attributes.sub,
           name: userDataAuth.username,
+          modules: "cs1101s, ma2001", 
+          personalityType: "INTP",
+          year: "Y1",
           imageUri:"https://cdn-icons-png.flaticon.com/512/1/1247.png",
         }
 
         // Add new user to db
-        await API.graphql(graphqlOperation(createUser, { input: newUser }));
-
+        const userCreated = await API.graphql(graphqlOperation(createUser, { input: newUser }));
+        setUserAdded(userCreated.data.createUser);
 
       }
 
@@ -56,7 +62,7 @@ function App() {
     fetchUser();
   }, []);
 
-  if (!isLoadingComplete) {
+  if (!isLoadingComplete || !userAdded) {
     return null;
   } else {
     return (
