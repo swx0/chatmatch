@@ -1,3 +1,5 @@
+// Custom queries
+
 export const getOtherUsers = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {

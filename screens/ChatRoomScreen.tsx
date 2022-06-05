@@ -10,6 +10,7 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../src/graphql/mutations';
 import { getMessagesByChatRoom } from './queries';
 import { useIsFocused } from '@react-navigation/native';
+import { onCreateMessage } from '../src/graphql/subscriptions';
 
 const ChatRoomScreen = () => {
 
@@ -38,6 +39,25 @@ const ChatRoomScreen = () => {
         setMessages(allMessagesData.data.messagesByChatRoomByCreatedAt.items);
       };
       getAllMessagesData();
+
+      // Subscribe to new messages
+      const subscribeMessage = API.graphql(graphqlOperation(onCreateMessage))
+                                    .subscribe({
+                                      next: (data) => {
+                                        // console.log(data);
+                                        const newMessage = data.value.data.onCreateMessage;
+
+                                        // Ignore messages from other ChatRoomIDs
+                                        if (newMessage.chatRoomID !== route.params.id) {
+                                          return;
+                                        }
+
+                                        // Add new message to existing messages
+                                        setMessages(messages => [...messages, newMessage]);
+                                      }});
+      
+      return () => subscribeMessage.unsubscribe();
+
     }
   }, [isFocused]); 
 

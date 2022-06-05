@@ -41,6 +41,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
     // List of [chatRoomID, otherUserID], where other user is already in a ChatRoom with logged in user
     const otherUsersCRData = await API.graphql(graphqlOperation(getOtherUsers, { id: myUser.attributes.sub }));
     const otherUsersCR = otherUsersCRData.data.getUser.chatRoomUserList.items;
+    console.log(otherUsersCR)
     const otherUsersCRList = otherUsersCR.map(userPair => userPair.chatRoom.chatRoomUserList.items[0].user.id === myUser.attributes.sub 
                                                           ? [userPair.chatRoom.chatRoomUserList.items[1].user.id, userPair.chatRoom.chatRoomUserList.items[1].chatRoomID] 
                                                           : [userPair.chatRoom.chatRoomUserList.items[0].user.id, userPair.chatRoom.chatRoomUserList.items[0].chatRoomID]);
