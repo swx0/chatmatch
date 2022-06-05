@@ -5,7 +5,7 @@ import { useRoute } from '@react-navigation/native';
 import { FlatList, StyleSheet, TextInput, Pressable } from 'react-native';
 import ChatMessage from '../components/ChatMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../src/graphql/mutations';
 import { getMessagesByChatRoom } from './queries';
@@ -13,7 +13,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { onCreateMessage } from '../src/graphql/subscriptions';
 
 const ChatRoomScreen = () => {
-
+  const flatListRef = useRef();
   const isFocused = useIsFocused();
   const route = useRoute();
 
@@ -73,7 +73,10 @@ const ChatRoomScreen = () => {
     <View style={styles.container}>
       <FlatList 
         data={messages}
+        ref={flatListRef}
         renderItem={({ item }) => <ChatMessage message={item} myUser={myUser}/>}
+        onContentSizeChange={() => flatListRef.current.scrollToEnd()}
+        onLayout={() => flatListRef.current.scrollToEnd()}
       />
       <View style={styles.inputContainer}>
         <TextInput 
