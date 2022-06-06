@@ -2,6 +2,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateMessageByChatRoomID = /* GraphQL */ `
+  subscription OnCreateMessageByChatRoomID($chatRoomID: ID!) {
+    onCreateMessageByChatRoomID(chatRoomID: $chatRoomID) {
+      id
+      userID
+      chatRoomID
+      createdAt
+      body
+      user {
+        id
+        name
+        imageUri
+        year
+        personalityType
+        modules
+        chatRoomUserList {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        chatRoomUserList {
+          nextToken
+        }
+        messages {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      updatedAt
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {

@@ -51,3 +51,7 @@ type Message
     chatRoom: ChatRoom @connection(fields:["chatRoomID"])
 }
 
+type Subscription {
+  onCreateMessageByChatRoomID(chatRoomID: ID!): Message
+    @aws_subscribe(mutations: ["createMessage"])
+}
