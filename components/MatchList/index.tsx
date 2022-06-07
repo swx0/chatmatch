@@ -9,7 +9,7 @@ import { getUser } from '../../src/graphql/queries';
 import Colors from '../../constants/Colors';
 import { getOtherUsers } from '../../screens/queries';
 import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations';
-
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 export default function MatchList ({ myUser, userList, navigation }) {
     
@@ -88,11 +88,51 @@ export default function MatchList ({ myUser, userList, navigation }) {
                         return (<TouchableOpacity style={styles.card} key={item.id} onPress={() => onPress(item.id, item.name)}>
                                     <View>
                                         <Card>
-                                            <View style={{alignItems: 'flex-start'}}>
-                                                <Text>{item.name}</Text>
-                                                <Text>Type compatibility: {matchByType(myType, item.personalityType)}%</Text>
-                                                <Text>No. of same mods taken: {matchByMods(myMods, otherMods)}</Text>
-                                                <Text>Overall Match: {totalMatch(matchByType(myType, item.personalityType), matchByMods(myMods, otherMods), myMods.length, otherMods.length).toFixed(1)}%</Text>
+                                            <View style={{alignItems: 'stretch'}}>
+                                                <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
+                                                <Text>Same modules count: {matchByMods(myMods, otherMods)}</Text>
+                                                <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
+                                                    <AnimatedCircularProgress
+                                                        size={100}
+                                                        style={{marginTop:-25}}
+                                                        width={15}
+                                                        arcSweepAngle={180}
+                                                        fill={matchByType(myType, item.personalityType)}
+                                                        tintColor='#821752'
+                                                        backgroundColor="#3d5875">
+                                                        {
+                                                            (fill) => (
+                                                                <Text>{matchByType(myType, item.personalityType)}%</Text>
+                                                            )
+                                                        }
+                                                    </AnimatedCircularProgress>
+
+                                                    
+
+                                                    <AnimatedCircularProgress
+                                                        size={100}
+                                                        style={{marginTop:-25}}
+                                                        width={15}
+                                                        arcSweepAngle={180}
+                                                        fill={Math.round(totalMatch(matchByType(myType, item.personalityType), matchByMods(myMods, otherMods), myMods.length, otherMods.length))}
+                                                        tintColor='#821752'
+                                                        backgroundColor="#3d5875">
+                                                        {
+                                                            (fill) => (
+                                                                <Text>{totalMatch(matchByType(myType, item.personalityType), matchByMods(myMods, otherMods), myMods.length, otherMods.length).toFixed(1)}%</Text>
+                                                            )
+                                                        }
+                                                    </AnimatedCircularProgress>
+                                                </View>
+                                                <View style={{flexDirection: 'row'}}>
+                                                    <Text style={{marginLeft:25}}>Type Compatibility</Text>
+                                                    <Text style={{marginLeft:65}}>Overall Match</Text>
+                                                </View>
+                                                        
+                                                    
+                                                
+
+
                                             </View>
                                         </Card>
                                     </View>

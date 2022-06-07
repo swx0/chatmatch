@@ -19,11 +19,21 @@ const ChatRoomScreen = () => {
 
   //console.log(route.params);
 
+  const [noSelect, setNoSelect] = useState(false);
   const [text, setText] = useState('');
   const [myUser, setMyUser] = useState(null);
   const [messages, setMessages] = useState([]);
-
+  
   useEffect(() => {
+
+    // User has not selected person to chat with
+    if (route.params === undefined) {
+      setNoSelect(true)
+      return () => {};
+    } else {
+      setNoSelect(false);
+    }
+    
     if (isFocused) {
       const getMyUser = async () => {
         const myUserData = await Auth.currentAuthenticatedUser();
@@ -35,17 +45,17 @@ const ChatRoomScreen = () => {
       const getAllMessagesData = async () => {
         // Customized query
         const allMessagesData = await API.graphql(graphqlOperation(getMessagesByChatRoom, { chatRoomID: route.params.id }));
-        console.log(allMessagesData.data.messagesByChatRoomByCreatedAt.items); 
+        //console.log(allMessagesData.data.messagesByChatRoomByCreatedAt.items); 
         setMessages(allMessagesData.data.messagesByChatRoomByCreatedAt.items);
       };
       getAllMessagesData();
 
       // Subscribe to new messages for this ChatRoom
-      const subscribeMessage = API.graphql(graphqlOperation(onCreateMessage, { chatRoomID: route.params.id }))
+      const subscribeMessage = API.graphql(graphqlOperation(onCreateMessageByChatRoomID, { chatRoomID: route.params.id }))
                                     .subscribe({
                                       next: (data) => {
-                                        // console.log(data);
-                                        const newMessage = data.value.data.onCreateMessage;
+                                        //console.log(data);
+                                        const newMessage = data.value.data.onCreateMessageByChatRoomID;
 
                                         // Add new message to existing messages
                                         setMessages(messages => [...messages, newMessage]);
@@ -55,6 +65,12 @@ const ChatRoomScreen = () => {
 
     }
   }, [isFocused]); 
+
+  // User has not selected person to chat with
+  if (noSelect) {
+    return <Text>Choose user to chat with first!</Text>;
+  }
+  
 
   // Send myUser's message
   const onPress = async () => {
@@ -101,7 +117,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#e2d4f8',
+    backgroundColor: '#d0f5f3',
     padding: 15,
     marginVertical: 5,
     marginHorizontal: 10,
