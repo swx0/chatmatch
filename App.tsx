@@ -44,7 +44,7 @@ function App() {
         const newUser = {
           id: userDataAuth.attributes.sub,
           name: userDataAuth.username,
-          modules: "cs1101s, ma2001", 
+          modules: "CS1101S, MA2001", 
           personalityType: "INTP",
           year: "Y1",
           imageUri:"https://cdn-icons-png.flaticon.com/512/1/1247.png",
