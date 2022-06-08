@@ -87,7 +87,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                         const otherMods = otherModsString.split(', ');
                         return (<TouchableOpacity style={styles.card} key={item.id} onPress={() => onPress(item.id, item.name)}>
                                     <View>
-                                        <Card>
+                                        <Card containerStyle={{borderRadius:10}}>
                                             <View style={{alignItems: 'stretch'}}>
                                                 <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
                                                 <Text>Same modules count: {matchByMods(myMods, otherMods)}</Text>
@@ -149,15 +149,17 @@ const styles = StyleSheet.create({
     flex: 1,
 	flexDirection: 'column',
 	padding: 0,
-    backgroundColor: "#0aa",
+    backgroundColor: Colors.light.tint,
     alignItems: 'center',
     justifyContent: 'center'
   },
-
+  outer: {
+    
+  },
   card: {
 	  flex: 1,
 	  width: '100%',
-	  padding: 0,
+	  paddingBottom: 12,
 	  backgroundColor: Colors.light.tint,
 	  alignItems: 'stretch',
   }
