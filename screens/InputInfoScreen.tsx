@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Text, View, SafeAreaView, TextInput, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, TextInput, Button, Pressable, ScrollView, LogBox } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
@@ -8,6 +8,8 @@ import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
 import moduleList from '../data/moduleList';
 import typeList from '../data/typeList';
+
+LogBox.ignoreAllLogs();
 
 export default function InputInfoScreen({ navigation }) {
   const [userYear, setuserYear] = useState({});
@@ -32,8 +34,11 @@ export default function InputInfoScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>  
+    <ScrollView contentContainerStyle={styles.scrollContainer} nestedScrollEnabled = {true} >
       <View style={styles.container}>
+        
+
         <View style={{height:40}}/>
           <Text style={{ fontSize: 20, paddingBottom: 10 }}>Year of Study</Text>
           <SelectBox
@@ -43,6 +48,7 @@ export default function InputInfoScreen({ navigation }) {
             onChange={(val) => setuserYear(val)}
             hideInputFilter={false}
             width="90%"
+            listOptionProps={{ nestedScrollEnabled: true }}
           />
         <View style={{height:40}}/>
 
@@ -56,6 +62,7 @@ export default function InputInfoScreen({ navigation }) {
           }}
           hideInputFilter={false}
           width="90%"
+          listOptionProps={{ nestedScrollEnabled: true }}
         />
         <View style={{height:40}}/>
         
@@ -72,6 +79,7 @@ export default function InputInfoScreen({ navigation }) {
           }}
           width="90%"
           isMulti
+          listOptionProps={{ nestedScrollEnabled: true }}
         />
         <View style={{height:40}}/>
 
@@ -89,9 +97,9 @@ export default function InputInfoScreen({ navigation }) {
           <Text style={styles.buttonText}>SAVE</Text>
         </Pressable>
 
-        
-		
-      </View>
+        </View>
+        </ScrollView>
+      
     </SafeAreaView>
   );
 }
@@ -103,6 +111,9 @@ const styles = StyleSheet.create({
       backgroundColor: "#eee",
       alignItems: 'flex-start',
       marginLeft: 20,
+    },
+    scrollContainer: {
+      backgroundColor: "#eee",
     },
     input: {
         width: 270,

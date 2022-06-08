@@ -67,7 +67,7 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-        <Stack.Screen name="InputInfo" component={InputInfoScreen} />
+        <Stack.Screen name="InputInfo" component={InputInfoScreen} options={{ title: 'Edit Profile' }}/>
         {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile'}}/> */}
       </Stack.Group>
     </Stack.Navigator>
@@ -97,7 +97,7 @@ function BottomTabNavigator() {
         name="MatchMaking"
         component={MatchMakingScreen}
         options={({ navigation }: RootTabScreenProps<'MatchMaking'>) => ({
-          title: 'Matchmaking',
+          title: 'Matching',
           headerStyle: {
             backgroundColor: Colors.light.tint,
           },

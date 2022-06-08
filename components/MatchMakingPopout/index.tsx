@@ -35,7 +35,7 @@ const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) =>
             <MenuTrigger>
                 <Entypo name="dots-three-horizontal" size={24} color={Colors.light.background} />
             </MenuTrigger>
-            <MenuOptions>
+            <MenuOptions customStyles={optionsStyles}>
                 <MenuOption value={'Settings'} text='Settings' />
                 <MenuOption value={'Sign out'} text='Sign out'/>
             </MenuOptions>
@@ -43,6 +43,12 @@ const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) =>
 
     )
 }
+
+const optionsStyles = {
+    optionWrapper: {
+        padding: 10,
+    }
+} 
 
 export default MatchMakingPopout
 
