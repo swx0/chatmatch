@@ -10,6 +10,7 @@ export const getUser = /* GraphQL */ `
       imageUri
       year
       personalityType
+      hobbies
       modules
       chatRoomUserList {
         items {
@@ -39,6 +40,7 @@ export const listUsers = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -62,6 +64,7 @@ export const getChatRoomUser = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -102,6 +105,7 @@ export const listChatRoomUsers = /* GraphQL */ `
           imageUri
           year
           personalityType
+          hobbies
           modules
           createdAt
           updatedAt
@@ -184,6 +188,7 @@ export const getMessage = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -225,6 +230,7 @@ export const listMessages = /* GraphQL */ `
           imageUri
           year
           personalityType
+          hobbies
           modules
           createdAt
           updatedAt
@@ -269,6 +275,7 @@ export const messagesByChatRoomByCreatedAt = /* GraphQL */ `
           imageUri
           year
           personalityType
+          hobbies
           modules
           createdAt
           updatedAt

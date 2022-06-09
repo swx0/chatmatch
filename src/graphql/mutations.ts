@@ -13,6 +13,7 @@ export const createUser = /* GraphQL */ `
       imageUri
       year
       personalityType
+      hobbies
       modules
       chatRoomUserList {
         items {
@@ -40,6 +41,7 @@ export const updateUser = /* GraphQL */ `
       imageUri
       year
       personalityType
+      hobbies
       modules
       chatRoomUserList {
         items {
@@ -67,6 +69,7 @@ export const deleteUser = /* GraphQL */ `
       imageUri
       year
       personalityType
+      hobbies
       modules
       chatRoomUserList {
         items {
@@ -98,6 +101,7 @@ export const createChatRoomUser = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -136,6 +140,7 @@ export const updateChatRoomUser = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -174,6 +179,7 @@ export const deleteChatRoomUser = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -313,6 +319,7 @@ export const createMessage = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -352,6 +359,7 @@ export const updateMessage = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken
@@ -391,6 +399,7 @@ export const deleteMessage = /* GraphQL */ `
         imageUri
         year
         personalityType
+        hobbies
         modules
         chatRoomUserList {
           nextToken

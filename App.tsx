@@ -46,6 +46,7 @@ function App() {
           name: userDataAuth.username,
           modules: "CS1101S, MA2001", 
           personalityType: "INTP",
+          hobbies: "3, 3, 3, 3",
           year: "Y1",
           imageUri:"https://cdn-icons-png.flaticon.com/512/1/1247.png",
         }

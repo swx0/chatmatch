@@ -34,10 +34,10 @@ export default function InputInfoScreen({ navigation }) {
     } else if (userType.id === undefined) {
       alert('Indicate MBTI')
     } else {
-      console.log(selectedRatings)
+      const selectedRatingsString = selectedRatings.join(', ');
       const selectedModulesString = selectedModules.map(mod => mod.id).join(', ');
       const myUser = await Auth.currentAuthenticatedUser();
-      await API.graphql(graphqlOperation(updateUser, { input: { id: myUser.attributes.sub, modules: selectedModulesString, personalityType: userType.id, year: userYear.id } }));
+      await API.graphql(graphqlOperation(updateUser, { input: { id: myUser.attributes.sub, modules: selectedModulesString, personalityType: userType.id, year: userYear.id, hobbies: selectedRatingsString } }));
       return navigation.navigate('MatchMaking', {type: userType, mods: selectedModules});
 	  }
   };

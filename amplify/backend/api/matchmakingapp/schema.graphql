@@ -8,6 +8,7 @@ type User @model @auth(rules: [{ allow: private }]) {
   imageUri: String
   year: String
   personalityType: String
+  hobbies: String
   modules: String
   # List of ChatRoomUser type where the User is present in the ChatRoom
   chatRoomUserList: [ChatRoomUser] @connection(keyName: "byUser", fields: ["id"])
