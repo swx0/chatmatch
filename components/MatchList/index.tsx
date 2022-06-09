@@ -90,7 +90,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                         <Card containerStyle={{borderRadius:10}}>
                                             <View style={{alignItems: 'stretch'}}>
                                                 <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
-                                                <Text>Same modules count: {matchByMods(myMods, otherMods)}</Text>
+                                                <Text>Modules matched: {matchByMods(myMods, otherMods)}</Text>
                                                 <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
                                                     <AnimatedCircularProgress
                                                         size={100}

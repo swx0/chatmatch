@@ -8,15 +8,23 @@ import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
 import moduleList from '../data/moduleList';
 import typeList from '../data/typeList';
+import { Rating, AirbnbRating } from 'react-native-ratings';
+import Colors from '../constants/Colors';
+
 
 LogBox.ignoreAllLogs();
 
 export default function InputInfoScreen({ navigation }) {
   const [userYear, setuserYear] = useState({});
   const [userType, setType] = useState({});
-  const [selectedModules, setSelectedModules] = useState([])
+  const [selectedModules, setSelectedModules] = useState([]);
+  const [selectedRatings, setSelectedRatings] = useState([3, 3, 3, 3]);
 
   const yearList = [{item: 'Y1', id: 'Y1'}, {item: 'Y2', id: 'Y2'}, {item: 'Y3', id: 'Y3'}, {item: 'Y4', id: 'Y4'},];
+
+  const updateRatingsByIndex = (newRating, index) => {
+    setSelectedRatings(ratings => ratings.map((rating, i) => i === index ? newRating: rating));
+  };
 
   const onPress = async () => {
 	  if (selectedModules.length == 0) {
@@ -26,6 +34,7 @@ export default function InputInfoScreen({ navigation }) {
     } else if (userType.id === undefined) {
       alert('Indicate MBTI')
     } else {
+      console.log(selectedRatings)
       const selectedModulesString = selectedModules.map(mod => mod.id).join(', ');
       const myUser = await Auth.currentAuthenticatedUser();
       await API.graphql(graphqlOperation(updateUser, { input: { id: myUser.attributes.sub, modules: selectedModulesString, personalityType: userType.id, year: userYear.id } }));
@@ -83,6 +92,81 @@ export default function InputInfoScreen({ navigation }) {
         />
         <View style={{height:40}}/>
 
+        <Text style={{ fontSize: 20 }}>I enjoy collecting items as a hobby.</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Coins, Video games, Stamps</Text>
+
+        <View style={{alignSelf:'center', marginRight:20}}>
+        <AirbnbRating
+          count={5}
+          selectedColor={Colors.light.tint}
+          reviewColor='#821752'
+          reviewSize={20}
+          reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
+          defaultRating={3}
+          onFinishRating={(rate) => {
+            updateRatingsByIndex(rate, 0)
+          }}
+          size={35}
+        />
+        </View>
+        <View style={{height:40}}/>
+
+        <Text style={{ fontSize: 20 }}>I enjoy going for physical activities{'\n'}during my free time.</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Climbing, Gyming, Basketball</Text>
+
+        <View style={{alignSelf:'center', marginRight:20}}>
+        <AirbnbRating
+          count={5}
+          selectedColor={Colors.light.tint}
+          reviewColor='#821752'
+          reviewSize={20}
+          reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
+          defaultRating={3}
+          onFinishRating={(rate) => {
+            updateRatingsByIndex(rate, 1)
+          }}
+          size={35}
+        />
+        </View>
+        <View style={{height:40}}/>
+
+        <Text style={{ fontSize: 20 }}>I enjoy making items as a hobby.</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Knitting, Cooking, 3D Printing</Text>
+
+        <View style={{alignSelf:'center', marginRight:20}}>
+        <AirbnbRating
+          count={5}
+          selectedColor={Colors.light.tint}
+          reviewColor='#821752'
+          reviewSize={20}
+          reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
+          defaultRating={3}
+          onFinishRating={(rate) => {
+            updateRatingsByIndex(rate, 2)
+          }}
+          size={35}
+        />
+        </View>
+        <View style={{height:40}}/>
+
+        <Text style={{ fontSize: 20 }}>I appreciate the arts.</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Drama, Dance, Calligraphy</Text>
+
+        <View style={{alignSelf:'center', marginRight:20}}>
+        <AirbnbRating
+          count={5}
+          selectedColor={Colors.light.tint}
+          reviewColor='#821752'
+          reviewSize={20}
+          reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
+          defaultRating={3}
+          onFinishRating={(rate) => {
+            updateRatingsByIndex(rate, 3)
+          }}
+          size={35}
+        />
+        </View>
+        <View style={{height:40}}/>
         
         <Pressable 
           onPress={onPress}
