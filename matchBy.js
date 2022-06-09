@@ -24,8 +24,17 @@ export function matchByMods(first, second) {
      return first.filter( n => second.indexOf(n) !== -1).length;
 }
 
-export function totalMatch(typeMatch, modMatch, l1, l2) { //l1 and l2 is the number of mods taken by each person
-     return (typeMatch*0.6)+((modMatch/Math.min(l1, l2) * 100)*0.4);
+export function matchByHobbies(first, second) {
+     var result = 0;
+     for (var i = 0; i < first.length; i++) {
+          result += Math.abs(parseInt(first[i]) - parseInt(second[i]));
+     }
+
+     return ((16-result) / 16) * 100;
+}
+
+export function totalMatch(typeMatch, modMatch, l1, l2, hobbiesMatch) { //l1 and l2 is the number of mods taken by each person
+     return (typeMatch * 0.45) + ((modMatch / Math.min(l1, l2) * 100) * 0.4) + (hobbiesMatch * 0.15);
 
 }
  
