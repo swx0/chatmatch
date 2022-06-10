@@ -10,10 +10,18 @@ import Colors from '../../constants/Colors';
 import { getOtherUsers } from '../../screens/queries';
 import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import SwitchSelector from 'react-native-switch-selector';
 
 export default function MatchList ({ myUser, userList, navigation }) {
     
     const [myUserData, setMyUserData] = useState(null);
+    const [config, setConfig] = useState("default");
+
+    const switchOptions = [
+        { label: "", value: "module", imageIcon: require('../../assets/images/module.png')},
+        { label: "", value: "default", imageIcon: require('../../assets/images/default2.png') },
+        { label: "", value: "personality", imageIcon: require('../../assets/images/personality.png') }
+      ];
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -83,30 +91,45 @@ export default function MatchList ({ myUser, userList, navigation }) {
     return (
 		<ScrollView contentContainerStyle={styles.outer}>
 			<View style={styles.container}>
+            <SwitchSelector
+                hasPadding
+                fontSize={13}
+                buttonColor='#821752'
+                options={switchOptions}
+                initial={1}
+                onPress={value => {
+                    setConfig(value);
+                }}
+                style={{marginLeft:20, marginRight:150, marginTop:12}}
+                />
                 {
                     otherUserList.map((item) => {
                         const otherModsString = item.modules;
                         const otherMods = otherModsString.split(', ');
                         const otherHobbiesString = item.hobbies;
                         const otherHobbies = otherHobbiesString.split(', ');
+                        const typeMatch = matchByType(myType, item.personalityType);
+                        const modMatch = matchByMods(myMods, otherMods);
+                        const hobbiesMatch = matchByHobbies(myHobbies, otherHobbies);
+                        const total = totalMatch(typeMatch, modMatch, myMods.length, otherMods.length, hobbiesMatch, config);
                         return (<TouchableOpacity style={styles.card} key={item.id} onPress={() => onPress(item.id, item.name)}>
                                     <View>
                                         <Card containerStyle={{borderRadius:10}}>
                                             <View style={{alignItems: 'stretch'}}>
                                                 <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
-                                                <Text>Modules matched: {matchByMods(myMods, otherMods)}</Text>
+                                                <Text>Modules matched: {modMatch}</Text>
                                                 <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
                                                     <AnimatedCircularProgress
                                                         size={100}
                                                         style={{marginTop:-25}}
                                                         width={15}
-                                                        arcSweepAngle={180}
-                                                        fill={matchByType(myType, item.personalityType)}
+                                                        arcSweepAngle={135}
+                                                        fill={typeMatch}
                                                         tintColor='#821752'
                                                         backgroundColor="#3d5875">
                                                         {
                                                             (fill) => (
-                                                                <Text>{matchByType(myType, item.personalityType)}%</Text>
+                                                                <Text>{typeMatch}%</Text>
                                                             )
                                                         }
                                                     </AnimatedCircularProgress>
@@ -116,14 +139,14 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                                     <AnimatedCircularProgress
                                                         size={100}
                                                         style={{marginTop:-25}}
-                                                        width={15}
-                                                        arcSweepAngle={180}
-                                                        fill={Math.round(totalMatch(matchByType(myType, item.personalityType), matchByMods(myMods, otherMods), myMods.length, otherMods.length, matchByHobbies(myHobbies, otherHobbies)))}
+                                                        width={20}
+                                                        arcSweepAngle={135}
+                                                        fill={Math.round(total)}
                                                         tintColor='#821752'
                                                         backgroundColor="#3d5875">
                                                         {
                                                             (fill) => (
-                                                                <Text>{totalMatch(matchByType(myType, item.personalityType), matchByMods(myMods, otherMods), myMods.length, otherMods.length, matchByHobbies(myHobbies, otherHobbies)).toFixed(1)}%</Text>
+                                                                <Text>{total.toFixed(1)}%</Text>
                                                             )
                                                         }
                                                     </AnimatedCircularProgress>
