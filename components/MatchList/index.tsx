@@ -117,7 +117,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                         <Card containerStyle={{borderRadius:10}}>
                                             <View style={{alignItems: 'stretch'}}>
                                                 <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
-                                                <Text>Modules matched: {modMatch}</Text>
+                                                <Text style={{color: 'lightslategrey'}}>Modules matched: {modMatch}</Text>
                                                 <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
                                                     <AnimatedCircularProgress
                                                         size={100}
@@ -146,14 +146,14 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                                         backgroundColor="#3d5875">
                                                         {
                                                             (fill) => (
-                                                                <Text>{total.toFixed(1)}%</Text>
+                                                                <Text style={{color: 'darkslategrey'}}>{total.toFixed(1)}%</Text>
                                                             )
                                                         }
                                                     </AnimatedCircularProgress>
                                                 </View>
                                                 <View style={{flexDirection: 'row'}}>
-                                                    <Text style={{marginLeft:25}}>Type Compatibility</Text>
-                                                    <Text style={{marginLeft:65}}>Overall Match</Text>
+                                                    <Text style={{color: 'darkslategrey', marginLeft:25}}>Type Compatibility</Text>
+                                                    <Text style={{color: 'darkslategrey', marginLeft:65, fontWeight: "bold"}}>Overall Match</Text>
                                                 </View>
                                                         
                                                     

@@ -93,7 +93,7 @@ export default function InputInfoScreen({ navigation }) {
         <View style={{height:40}}/>
 
         <Text style={{ fontSize: 20 }}>I enjoy collecting items as a hobby.</Text>
-        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Coins, Video games, Stamps</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10, color: 'lightslategrey' }}>Eg. Coins, Video games, Stamps</Text>
 
         <View style={{alignSelf:'center', marginRight:20}}>
         <AirbnbRating
@@ -112,7 +112,7 @@ export default function InputInfoScreen({ navigation }) {
         <View style={{height:40}}/>
 
         <Text style={{ fontSize: 20 }}>I enjoy going for physical activities{'\n'}during my free time.</Text>
-        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Climbing, Gyming, Basketball</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10, color: 'lightslategrey' }}>Eg. Climbing, Gyming, Basketball</Text>
 
         <View style={{alignSelf:'center', marginRight:20}}>
         <AirbnbRating
@@ -131,7 +131,7 @@ export default function InputInfoScreen({ navigation }) {
         <View style={{height:40}}/>
 
         <Text style={{ fontSize: 20 }}>I enjoy making items as a hobby.</Text>
-        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Knitting, Cooking, 3D Printing</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10, color: 'lightslategrey' }}>Eg. Knitting, Cooking, 3D Printing</Text>
 
         <View style={{alignSelf:'center', marginRight:20}}>
         <AirbnbRating
@@ -150,7 +150,7 @@ export default function InputInfoScreen({ navigation }) {
         <View style={{height:40}}/>
 
         <Text style={{ fontSize: 20 }}>I appreciate the arts.</Text>
-        <Text style={{ fontSize: 15, paddingBottom: 10 }}>Eg. Drama, Dance, Calligraphy</Text>
+        <Text style={{ fontSize: 15, paddingBottom: 10, color: 'lightslategrey' }}>Eg. Drama, Dance, Calligraphy</Text>
 
         <View style={{alignSelf:'center', marginRight:20}}>
         <AirbnbRating
