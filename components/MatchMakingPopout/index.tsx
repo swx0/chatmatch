@@ -8,7 +8,9 @@ import Colors from '../../constants/Colors';
 import { Entypo } from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
 import { RootTabScreenProps } from '../../types';
-
+import { Text } from "react-native";
+import { Feather } from '@expo/vector-icons'; 
+import { Octicons } from '@expo/vector-icons'; 
 
 async function signOut() {
     try {
@@ -36,8 +38,14 @@ const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) =>
                 <Entypo name="dots-three-horizontal" size={24} color={Colors.light.background} />
             </MenuTrigger>
             <MenuOptions customStyles={optionsStyles}>
-                <MenuOption value={'Settings'} text='Settings' />
-                <MenuOption value={'Sign out'} text='Sign out'/>
+                <MenuOption value={'Settings'} style={{flexDirection:'row'}}>
+                    <Feather name="settings" size={24} color="black" />
+                    <Text style={{marginLeft:10}}>Settings</Text>
+                </MenuOption>
+                <MenuOption value={'Sign out'} style={{flexDirection:'row'}}>
+                    <Octicons name="sign-out" size={24} color="black" style={{marginLeft:3.5}}/>
+                    <Text style={{marginLeft:10}}>Sign out</Text>
+                </MenuOption>
             </MenuOptions>
         </Menu>
 
