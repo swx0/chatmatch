@@ -1,35 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import SelectBox from 'react-native-multi-selectbox';
+import React, { useState } from 'react';
 
 export default function ModalScreen() {
+  const [userYear, setuserYear] = useState({});
+  const yearList = [{item: 'Y1', id: 'Y1'}, {item: 'Y2', id: 'Y2'}, {item: 'Y3', id: 'Y3'}, {item: 'Y4', id: 'Y4'},];
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ModalScreen.tsx" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>  
+      <ScrollView contentContainerStyle={styles.scrollContainer} nestedScrollEnabled = {true} >
+        <View style={styles.container}>
+            <View style={{height:20}}/>
+              <Text style={{ fontSize: 20, paddingBottom: 10 }}>Time zone</Text>
+              <SelectBox
+                label="Select single"
+                options={yearList}
+                value={userYear}
+                onChange={(val) => setuserYear(val)}
+                hideInputFilter={false}
+                width="90%"
+                listOptionProps={{ nestedScrollEnabled: true }}
+              />
+            <View style={{height:40}}/>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    backgroundColor: "#eee",
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    flexDirection: 'column',
+    backgroundColor: "#eee",
+    alignItems: 'flex-start',
+    marginLeft: 20,
   },
 });

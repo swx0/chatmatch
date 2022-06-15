@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Message } from "../../types";
+import moment from 'moment';
 
 export type ChatMessageProps = {
     message: Message;
@@ -10,7 +11,7 @@ const ChatMessage = (props: ChatMessageProps) => {
     const message = props.message;
     const myUser = props.myUser;
     var dateTime = message.createdAt.valueOf();
-    var time = dateTime.split(/T|Z/)[1].slice(0,5);
+    var formattedDateTime = moment(dateTime).local().format("MMM DD | HH:mm");
 
     // Check whether is my message 
     const checkMyMessage = (message: Message) => message.user.id === myUser;
@@ -19,7 +20,7 @@ const ChatMessage = (props: ChatMessageProps) => {
         <View>
             <View style={checkMyMessage(message) ? styles.myItem : styles.otherItem}>
                 <Text>{message.body}</Text>
-                <Text style={{textAlign:"right", color: "#868686"}}>{time}</Text>
+                <Text style={{textAlign:"right", color: "#868686"}}>{formattedDateTime}</Text>
             </View>
         </View>
 

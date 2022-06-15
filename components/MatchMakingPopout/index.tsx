@@ -22,7 +22,7 @@ const MatchMakingPopout = ({ navigation }: RootTabScreenProps<'MatchMaking'>) =>
 
     const onSelect = (value: string) => {
         if (value === 'Settings') {
-            alert(`Settings`)
+            return navigation.navigate('Modal');
         } else if (value === 'Sign out') {
             signOut();
         } else {

@@ -66,7 +66,7 @@ function RootNavigator() {
         }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Modal" component={ModalScreen} options={{ title: 'Settings' }}/>
         <Stack.Screen name="InputInfo" component={InputInfoScreen} options={{ title: 'Edit Profile' }}/>
         {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile'}}/> */}
       </Stack.Group>
@@ -91,6 +91,7 @@ function BottomTabNavigator() {
         tabBarLabelStyle: {
           fontWeight: 'bold'
         },
+        
         headerShown: true,
       }}>
       <BottomTab.Screen
@@ -112,7 +113,7 @@ function BottomTabNavigator() {
                 })}>
                 <FontAwesome name="edit" size={25} color={Colors.light.background} style={{ marginRight: 15 }}/>
               </Pressable>
-              <MatchMakingPopout/>            
+              <MatchMakingPopout navigation={navigation}/>            
             </View>
           ),
           tabBarLabel: () => null,

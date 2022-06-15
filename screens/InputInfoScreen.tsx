@@ -48,7 +48,7 @@ export default function InputInfoScreen({ navigation }) {
       <View style={styles.container}>
         
 
-        <View style={{height:40}}/>
+        <View style={{height:20}}/>
           <Text style={{ fontSize: 20, paddingBottom: 10 }}>Year of Study</Text>
           <SelectBox
             label="Select single"
