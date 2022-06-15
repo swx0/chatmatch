@@ -13,18 +13,7 @@ export default function ModalScreen() {
     <SafeAreaView style={{ flex: 1 }}>  
       <ScrollView contentContainerStyle={styles.scrollContainer} nestedScrollEnabled = {true} >
         <View style={styles.container}>
-            <View style={{height:20}}/>
-              <Text style={{ fontSize: 20, paddingBottom: 10 }}>Time zone</Text>
-              <SelectBox
-                label="Select single"
-                options={yearList}
-                value={userYear}
-                onChange={(val) => setuserYear(val)}
-                hideInputFilter={false}
-                width="90%"
-                listOptionProps={{ nestedScrollEnabled: true }}
-              />
-            <View style={{height:40}}/>
+
           </View>
         </ScrollView>
       </SafeAreaView>
