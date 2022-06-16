@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState, useCallback } from 'react'
+import { RefreshControl, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { matchByType, matchByMods, totalMatch, matchByHobbies } from '../../matchBy';
 import { Card } from 'react-native-elements'
@@ -16,6 +16,13 @@ export default function MatchList ({ myUser, userList, navigation }) {
     
     const [myUserData, setMyUserData] = useState(null);
     const [config, setConfig] = useState("default");
+    const [refreshing, setRefreshing] = useState(false);
+    const onRefresh = useCallback(async () => {
+      setRefreshing(true);
+      // insert retrieving of db here
+      setTimeout(() => { setRefreshing(false) }, 2000);
+    }, [refreshing]);
+
 
     const switchOptions = [
         { label: "", value: "module", imageIcon: require('../../assets/images/module.png')},
@@ -87,9 +94,14 @@ export default function MatchList ({ myUser, userList, navigation }) {
     navigation.navigate('ChatRoom', { id: newChatRoomID, name: otherName});
     
     };
-
+    
     return (
-		<ScrollView contentContainerStyle={styles.outer}>
+    <SafeAreaView>
+		<ScrollView 
+      contentContainerStyle={styles.outer}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
 			<View style={styles.container}>
             <SwitchSelector
                 hasPadding
@@ -167,6 +179,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                 }
 			</View>
 		</ScrollView>
+    </SafeAreaView>
     );
 }
 
