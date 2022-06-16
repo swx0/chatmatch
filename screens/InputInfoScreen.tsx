@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput, Button, Pressable, Scr
 import { NavigationContainer } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
+
 import { updateUser } from '../src/graphql/mutations';
 import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
@@ -14,11 +15,13 @@ import Colors from '../constants/Colors';
 
 LogBox.ignoreAllLogs();
 
-export default function InputInfoScreen({ navigation }) {
-  const [userYear, setuserYear] = useState({});
-  const [userType, setType] = useState({});
-  const [selectedModules, setSelectedModules] = useState([]);
-  const [selectedRatings, setSelectedRatings] = useState([3, 3, 3, 3]);
+export default function InputInfoScreen({ navigation, route }) {
+  const mods = route.params.mods.map(mod => ({item: mod, id: mod}));
+
+  const [userYear, setuserYear] = useState({item: route.params.year, id: route.params.year});
+  const [userType, setType] = useState({item: route.params.type, id: route.params.type});
+  const [selectedModules, setSelectedModules] = useState(mods);
+  const [selectedRatings, setSelectedRatings] = useState([3, 3, 3, 3]); // questions still default
 
   const yearList = [{item: 'Y1', id: 'Y1'}, {item: 'Y2', id: 'Y2'}, {item: 'Y3', id: 'Y3'}, {item: 'Y4', id: 'Y4'},];
 
@@ -38,7 +41,7 @@ export default function InputInfoScreen({ navigation }) {
       const selectedModulesString = selectedModules.map(mod => mod.id).join(', ');
       const myUser = await Auth.currentAuthenticatedUser();
       await API.graphql(graphqlOperation(updateUser, { input: { id: myUser.attributes.sub, modules: selectedModulesString, personalityType: userType.id, year: userYear.id, hobbies: selectedRatingsString } }));
-      return navigation.navigate('MatchMaking', {type: userType, mods: selectedModules});
+      return navigation.navigate('MatchMaking', {year: userYear, type: userType, mods: selectedModules, rating: selectedRatings});
 	  }
   };
 

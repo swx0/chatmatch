@@ -9,8 +9,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import Toast from 'react-native-root-toast';
 
+
+import { getUser } from '../src/graphql/queries';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
@@ -82,6 +87,13 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const [myUserData, setMyUserData] = useState(null);
+
+  const fetchUser = async () => {
+    const userID = await Auth.currentAuthenticatedUser();
+    const myData = await API.graphql(graphqlOperation(getUser, { id: userID.attributes.sub }));
+    setMyUserData(myData.data.getUser);
+  };
 
   return (
     <BottomTab.Navigator
@@ -107,7 +119,11 @@ function BottomTabNavigator() {
           headerRight: () => (
             <View style={{flexDirection: 'row', marginRight: 15}}>
               <Pressable
-                onPress={() => navigation.navigate('InputInfo')} //it was 'Modal' screen previously
+                onPress={ async () => { 
+                  await fetchUser();
+                  navigation.navigate('InputInfo', {year: myUserData.year, type: myUserData.personalityType, mods: myUserData.modules.split(', ')})
+                  }
+                } //it was 'Modal' screen previously
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}>
