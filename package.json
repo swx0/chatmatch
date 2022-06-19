@@ -43,6 +43,7 @@
     "react-native-async-storage": "^0.0.1",
     "react-native-circular-progress": "^1.3.7",
     "react-native-elements": "^3.4.2",
+    "react-native-fast-image": "^8.5.11",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-multi-selectbox": "^1.5.0",
     "react-native-percentage-circle": "^1.0.7",

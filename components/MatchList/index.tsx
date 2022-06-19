@@ -167,11 +167,6 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                                     <Text style={{color: 'darkslategrey', marginLeft:25}}>Type Compatibility</Text>
                                                     <Text style={{color: 'darkslategrey', marginLeft:65, fontWeight: "bold"}}>Overall Match</Text>
                                                 </View>
-                                                        
-                                                    
-                                                
-
-
                                             </View>
                                         </Card>
                                     </View>

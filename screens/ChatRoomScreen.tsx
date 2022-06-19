@@ -2,7 +2,7 @@
 import { Text, View } from '../components/Themed';
 
 import { useRoute } from '@react-navigation/native';
-import { FlatList, StyleSheet, TextInput, Pressable } from 'react-native';
+import { FlatList, StyleSheet, TextInput, Pressable, ImageBackground } from 'react-native';
 import ChatMessage from '../components/ChatMessage';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { useEffect, useState, useRef } from 'react';
@@ -10,7 +10,8 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { createMessage } from '../src/graphql/mutations';
 import { getMessagesByChatRoom } from './queries';
 import { useIsFocused } from '@react-navigation/native';
-import { onCreateMessage, onCreateMessageByChatRoomID } from '../src/graphql/subscriptions';
+import { onCreateMessageByChatRoomID } from '../src/graphql/subscriptions';
+import Colors from '../constants/Colors';
 
 const ChatRoomScreen = () => {
   const flatListRef = useRef();
@@ -68,7 +69,11 @@ const ChatRoomScreen = () => {
 
   // User has not selected person to chat with
   if (noSelect) {
-    return <Text>Choose user to chat with first!</Text>;
+    return (<View style={styles.loadingContainer}>
+              <ImageBackground source={require('../assets/images/3dotsloading.gif')} style={styles.image}/>
+              <Text style={styles.loadingText}>Select a user first!</Text>
+            </View>
+            );
   }
   
 
@@ -114,6 +119,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent:'center', 
+    alignItems:'center',
+    flexDirection:'column',
+  
+  },
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -128,6 +140,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 5,
   },
+  image: {
+    width: 100, 
+    height: 100,
+  },
+  loadingText: {
+    color: '#821752',
+    fontSize: 20,
+  }
 
 });
 

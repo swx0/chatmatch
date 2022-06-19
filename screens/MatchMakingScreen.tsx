@@ -1,12 +1,10 @@
-
-
-import { Text } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import React, { useEffect, useState,  } from 'react';
 import { listUsers } from '../src/graphql/queries';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import MatchList from '../components/MatchList';
 import { useIsFocused } from '@react-navigation/native';
+import { ImageBackground, View, StyleSheet } from 'react-native';
 
 export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'MatchMaking'>) {
 
@@ -36,5 +34,21 @@ export default function MatchMakingScreen({ navigation }: RootTabScreenProps<'Ma
     } 
   }, [isFocused]);
 
-  return (userList && myUser ? <MatchList userList={userList} myUser={myUser} navigation={navigation}/>: <Text>Loading</Text>)
+  return (userList && myUser 
+            ? <MatchList userList={userList} myUser={myUser} navigation={navigation}/>
+            : <View style={styles.container}>
+                <ImageBackground source={require('../assets/images/3dotsloading.gif')} style={styles.image}/>
+              </View>)
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent:'center', 
+    alignItems:'center',
+  },
+  image: {
+    width: 100, 
+    height: 100,
+  }
+});
