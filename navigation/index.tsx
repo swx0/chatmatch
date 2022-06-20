@@ -129,6 +129,9 @@ function BottomTabNavigator() {
           headerStyle: {
             backgroundColor: Colors.light.tint,
           },
+          headerTitleStyle: {
+            textTransform: 'capitalize',
+          },
           headerTintColor: Colors.light.background,
           tabBarIcon: ({ color }) => <Entypo name="chat" size={24} color={color} />,
           tabBarLabel: () => null,
