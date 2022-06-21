@@ -11,11 +11,12 @@ import { getOtherUsers } from '../../screens/queries';
 import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import SwitchSelector from 'react-native-switch-selector';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default function MatchList ({ myUser, userList, navigation }) {
     
     const [myUserData, setMyUserData] = useState(null);
-    const [config, setConfig] = useState("default");
+    const [config, setConfig] = useState("Default");
     const [refreshing, setRefreshing] = useState(false);
     const onRefresh = useCallback(async () => {
       setRefreshing(true);
@@ -25,9 +26,9 @@ export default function MatchList ({ myUser, userList, navigation }) {
 
 
     const switchOptions = [
-        { label: "", value: "module", imageIcon: require('../../assets/images/module.png')},
-        { label: "", value: "default", imageIcon: require('../../assets/images/default2.png') },
-        { label: "", value: "personality", imageIcon: require('../../assets/images/personality.png') }
+        { label: "", value: "Module-heavy", imageIcon: require('../../assets/images/module.png')},
+        { label: "", value: "Default", imageIcon: require('../../assets/images/default2.png') },
+        { label: "", value: "Personality-heavy", imageIcon: require('../../assets/images/personality.png') }
       ];
 
     useEffect(() => {
@@ -97,11 +98,10 @@ export default function MatchList ({ myUser, userList, navigation }) {
     
     return (
     <SafeAreaView>
-		<ScrollView 
-      contentContainerStyle={styles.outer}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
+        <ScrollView 
+        contentContainerStyle={styles.outer}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
 			<View style={styles.container}>
             <SwitchSelector
                 hasPadding
@@ -111,6 +111,10 @@ export default function MatchList ({ myUser, userList, navigation }) {
                 initial={1}
                 onPress={value => {
                     setConfig(value);
+                    showMessage({
+                        message: "Selected " + value + " configuration",
+                        type: "success",
+                      });
                 }}
                 style={{marginLeft:20, marginRight:150, marginTop:12}}
                 />

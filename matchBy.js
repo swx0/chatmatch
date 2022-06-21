@@ -34,9 +34,9 @@ export function matchByHobbies(first, second) {
 }
 
 export function totalMatch(typeMatch, modMatch, l1, l2, hobbiesMatch, config) { //l1 and l2 is the number of mods taken by each person
-     if (config === "default") {
+     if (config === "Default") {
           return (typeMatch * 0.45) + ((modMatch / Math.min(l1, l2) * 100) * 0.4) + (hobbiesMatch * 0.15);
-     } else if (config === "personality") {
+     } else if (config === "Personality-heavy") {
           return (typeMatch * 0.55) + ((modMatch / Math.min(l1, l2) * 100) * 0.25) + (hobbiesMatch * 0.2);
      } else {
           return (typeMatch * 0.3) + ((modMatch / Math.min(l1, l2) * 100) * 0.6) + (hobbiesMatch * 0.1);

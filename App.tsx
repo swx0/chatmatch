@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { StatusBar as StatusBarHeight } from 'react-native';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { getUser } from './src/graphql/queries';
 import { createUser } from './src/graphql/mutations';
 import React from 'react';
+import FlashMessage from "react-native-flash-message";
 
 Amplify.configure(awsconfig);
 
@@ -72,6 +73,7 @@ function App() {
           <Navigation colorScheme={colorScheme} />
           <StatusBar />
         </MenuProvider>
+        <FlashMessage position="top" statusBarHeight={StatusBarHeight.currentHeight} icon="auto"/>
       </SafeAreaProvider>
     );
   }
