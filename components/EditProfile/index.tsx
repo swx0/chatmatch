@@ -27,8 +27,8 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, naviga
     };
   
     const onPress = async () => {
-        if (selectedModules.length == 0) {
-            alert('Indicate at least 1 module');
+      if (selectedModules.length == 0) {
+        alert('Indicate at least 1 module');
       } else if (userYear.id === undefined) {
         alert('Indicate Year of Study')
       } else if (userType.id === undefined) {

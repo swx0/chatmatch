@@ -11,10 +11,14 @@
     "test": "jest --watchAll"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "setupFiles": [
+      "./jestSetupFile.js"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@paraboly/react-native-report-modal": "^0.0.12",
     "@react-native-async-storage/async-storage": "^1.17.5",
     "@react-native-community/netinfo": "8.2.0",
     "@react-native-picker/picker": "2.4.0",
@@ -33,19 +37,23 @@
     "expo-splash-screen": "~0.15.1",
     "expo-status-bar": "~1.3.0",
     "expo-system-ui": "~1.2.0",
+    "expo-updates": "~0.13.2",
     "expo-web-browser": "~10.2.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "multiselect-react-dropdown": "^2.0.22",
+    "radio-buttons-react-native": "^1.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
     "react-native-async-storage": "^0.0.1",
     "react-native-circular-progress": "^1.3.7",
+    "react-native-custom-icon": "^0.0.3",
     "react-native-elements": "^3.4.2",
     "react-native-fast-image": "^8.5.11",
     "react-native-flash-message": "^0.2.1",
     "react-native-material-dropdown": "^0.11.1",
+    "react-native-modal": "^13.0.1",
     "react-native-multi-selectbox": "^1.5.0",
     "react-native-percentage-circle": "^1.0.7",
     "react-native-popup-menu": "^0.15.12",
@@ -58,6 +66,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/react-native": "^10.0.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
     "jest": "^26.6.3",

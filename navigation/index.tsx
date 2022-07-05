@@ -21,7 +21,8 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 import MatchMakingPopout from '../components/MatchMakingPopout';
 import InputInfoScreen from '../screens/InputInfoScreen';
-
+import ReportScreen from '../screens/ReportScreen';
+import ChatPopout from '../components/ChatPopout';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -66,6 +67,7 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} options={{ title: 'Settings' }}/>
+        <Stack.Screen name="Report" component={ReportScreen} options={{ title: 'Report User' }}/>
         <Stack.Screen name="InputInfo" component={InputInfoScreen} options={{ title: 'Edit Profile' }}/>
         {/* <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ title: 'Edit Profile'}}/> */}
       </Stack.Group>
@@ -124,7 +126,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           title: route?.params?.name,
           headerStyle: {
             backgroundColor: Colors.light.tint,
@@ -137,7 +139,7 @@ function BottomTabNavigator() {
           tabBarLabel: () => null,
           headerRight: () =>  (
             <View style={{flexDirection: 'row', marginRight: 15}}>
-              <Entypo name="dots-three-horizontal" size={24} color={Colors.light.background} />
+              <ChatPopout navigation={navigation} reportUserName={route?.params?.name} reportUserID={route?.params?.id}/> 
             </View>
           ),
           
