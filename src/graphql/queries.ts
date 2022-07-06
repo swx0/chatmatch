@@ -246,6 +246,37 @@ export const listMessages = /* GraphQL */ `
     }
   }
 `;
+export const getReportUser = /* GraphQL */ `
+  query GetReportUser($id: ID!) {
+    getReportUser(id: $id) {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listReportUsers = /* GraphQL */ `
+  query ListReportUsers(
+    $filter: ModelReportUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReportUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        nameID
+        name
+        reason
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const messagesByChatRoomByCreatedAt = /* GraphQL */ `
   query MessagesByChatRoomByCreatedAt(
     $chatRoomID: ID

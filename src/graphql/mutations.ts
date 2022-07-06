@@ -422,3 +422,48 @@ export const deleteMessage = /* GraphQL */ `
     }
   }
 `;
+export const createReportUser = /* GraphQL */ `
+  mutation CreateReportUser(
+    $input: CreateReportUserInput!
+    $condition: ModelReportUserConditionInput
+  ) {
+    createReportUser(input: $input, condition: $condition) {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateReportUser = /* GraphQL */ `
+  mutation UpdateReportUser(
+    $input: UpdateReportUserInput!
+    $condition: ModelReportUserConditionInput
+  ) {
+    updateReportUser(input: $input, condition: $condition) {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteReportUser = /* GraphQL */ `
+  mutation DeleteReportUser(
+    $input: DeleteReportUserInput!
+    $condition: ModelReportUserConditionInput
+  ) {
+    deleteReportUser(input: $input, condition: $condition) {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;

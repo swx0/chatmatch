@@ -106,6 +106,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
             <SwitchSelector
                 hasPadding
                 fontSize={13}
+                borderRadius={5}
                 buttonColor='#821752'
                 options={switchOptions}
                 initial={1}

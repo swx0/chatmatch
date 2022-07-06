@@ -52,6 +52,15 @@ type Message
     chatRoom: ChatRoom @connection(fields:["chatRoomID"])
 }
 
+type ReportUser
+  @model
+  @auth(rules: [{ allow: private, operations: [create] }]) {
+    id: ID!
+    nameID: ID!
+    name: String!
+    reason: String!
+}
+
 type Subscription {
   onCreateMessageByChatRoomID(chatRoomID: ID!): Message
     @aws_subscribe(mutations: ["createMessage"])

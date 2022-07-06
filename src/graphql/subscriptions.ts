@@ -423,3 +423,39 @@ export const onDeleteMessage = /* GraphQL */ `
     }
   }
 `;
+export const onCreateReportUser = /* GraphQL */ `
+  subscription OnCreateReportUser {
+    onCreateReportUser {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateReportUser = /* GraphQL */ `
+  subscription OnUpdateReportUser {
+    onUpdateReportUser {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteReportUser = /* GraphQL */ `
+  subscription OnDeleteReportUser {
+    onDeleteReportUser {
+      id
+      nameID
+      name
+      reason
+      createdAt
+      updatedAt
+    }
+  }
+`;

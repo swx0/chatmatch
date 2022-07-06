@@ -3,19 +3,21 @@ import { View, Text } from '../components/Themed';
 import React, { useState } from 'react';
 import RadioButtonRN from 'radio-buttons-react-native';
 import { Icon } from 'react-native-elements';
-import { RootTabScreenProps } from '../types';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createReportUser } from '../src/graphql/mutations';
 
 export default function ReportScreen({ navigation, route }) {
 
   const [reason, setReason] = useState("");
 
-  const onPress = () => {
+  const onPress = async () => {
     if (reason == "") {
       alert("Select a reason");
     } else {
+      await API.graphql(graphqlOperation(createReportUser, { input: { nameID: route.params.reportUserID, name: route.params.reportUserName, reason: reason } }))
       return navigation.goBack();
     }
-  }
+  };
 
   const data = [
     {

@@ -224,6 +224,43 @@ export type DeleteMessageInput = {
   id: string,
 };
 
+export type CreateReportUserInput = {
+  id?: string | null,
+  nameID: string,
+  name: string,
+  reason: string,
+};
+
+export type ModelReportUserConditionInput = {
+  nameID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  reason?: ModelStringInput | null,
+  and?: Array< ModelReportUserConditionInput | null > | null,
+  or?: Array< ModelReportUserConditionInput | null > | null,
+  not?: ModelReportUserConditionInput | null,
+};
+
+export type ReportUser = {
+  __typename: "ReportUser",
+  id: string,
+  nameID: string,
+  name: string,
+  reason: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateReportUserInput = {
+  id: string,
+  nameID?: string | null,
+  name?: string | null,
+  reason?: string | null,
+};
+
+export type DeleteReportUserInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -274,6 +311,22 @@ export type ModelMessageFilterInput = {
   and?: Array< ModelMessageFilterInput | null > | null,
   or?: Array< ModelMessageFilterInput | null > | null,
   not?: ModelMessageFilterInput | null,
+};
+
+export type ModelReportUserFilterInput = {
+  id?: ModelIDInput | null,
+  nameID?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  reason?: ModelStringInput | null,
+  and?: Array< ModelReportUserFilterInput | null > | null,
+  or?: Array< ModelReportUserFilterInput | null > | null,
+  not?: ModelReportUserFilterInput | null,
+};
+
+export type ModelReportUserConnection = {
+  __typename: "ModelReportUserConnection",
+  items:  Array<ReportUser | null >,
+  nextToken?: string | null,
 };
 
 export type ModelStringKeyConditionInput = {
@@ -784,6 +837,57 @@ export type DeleteMessageMutation = {
   } | null,
 };
 
+export type CreateReportUserMutationVariables = {
+  input: CreateReportUserInput,
+  condition?: ModelReportUserConditionInput | null,
+};
+
+export type CreateReportUserMutation = {
+  createReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateReportUserMutationVariables = {
+  input: UpdateReportUserInput,
+  condition?: ModelReportUserConditionInput | null,
+};
+
+export type UpdateReportUserMutation = {
+  updateReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteReportUserMutationVariables = {
+  input: DeleteReportUserInput,
+  condition?: ModelReportUserConditionInput | null,
+};
+
+export type DeleteReportUserMutation = {
+  deleteReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -1073,6 +1177,44 @@ export type ListMessagesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetReportUserQueryVariables = {
+  id: string,
+};
+
+export type GetReportUserQuery = {
+  getReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListReportUsersQueryVariables = {
+  filter?: ModelReportUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListReportUsersQuery = {
+  listReportUsers?:  {
+    __typename: "ModelReportUserConnection",
+    items:  Array< {
+      __typename: "ReportUser",
+      id: string,
+      nameID: string,
+      name: string,
+      reason: string,
+      createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -1596,6 +1738,42 @@ export type OnDeleteMessageSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateReportUserSubscription = {
+  onCreateReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateReportUserSubscription = {
+  onUpdateReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteReportUserSubscription = {
+  onDeleteReportUser?:  {
+    __typename: "ReportUser",
+    id: string,
+    nameID: string,
+    name: string,
+    reason: string,
+    createdAt: string,
     updatedAt: string,
   } | null,
 };
