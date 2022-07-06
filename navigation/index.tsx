@@ -99,7 +99,7 @@ function BottomTabNavigator() {
         name="MatchMaking"
         component={MatchMakingScreen}
         options={({ navigation }: RootTabScreenProps<'MatchMaking'>) => ({
-          title: 'Matching',
+          title: 'MatchMake',
           headerStyle: {
             backgroundColor: Colors.light.tint,
           },
