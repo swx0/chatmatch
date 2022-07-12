@@ -12,13 +12,13 @@ import Colors from '../../constants/Colors';
 
 LogBox.ignoreAllLogs();
 
-export default function EditProfile({ myUserYear, myUserType, myUserMods, navigation }) {
+export default function EditProfile({ myUserYear, myUserType, myUserMods, myUserHobbies, navigation }) {
     const mods = myUserMods.map(mod => ({item: mod, id: mod}));
   
     const [userYear, setuserYear] = useState({item: myUserYear, id: myUserYear});
     const [userType, setType] = useState({item: myUserType, id: myUserType});
     const [selectedModules, setSelectedModules] = useState(mods);
-    const [selectedRatings, setSelectedRatings] = useState([3, 3, 3, 3]); // questions still default
+    const [selectedRatings, setSelectedRatings] = useState(myUserHobbies);
   
     const yearList = [{item: 'Y1', id: 'Y1'}, {item: 'Y2', id: 'Y2'}, {item: 'Y3', id: 'Y3'}, {item: 'Y4', id: 'Y4'},];
   
@@ -102,7 +102,7 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, naviga
             reviewColor='#821752'
             reviewSize={20}
             reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
-            defaultRating={3}
+            defaultRating={myUserHobbies[0]}
             onFinishRating={(rate) => {
               updateRatingsByIndex(rate, 0)
             }}
@@ -121,7 +121,7 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, naviga
             reviewColor='#821752'
             reviewSize={20}
             reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
-            defaultRating={3}
+            defaultRating={myUserHobbies[1]}
             onFinishRating={(rate) => {
               updateRatingsByIndex(rate, 1)
             }}
@@ -140,7 +140,7 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, naviga
             reviewColor='#821752'
             reviewSize={20}
             reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
-            defaultRating={3}
+            defaultRating={myUserHobbies[2]}
             onFinishRating={(rate) => {
               updateRatingsByIndex(rate, 2)
             }}
@@ -159,7 +159,7 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, naviga
             reviewColor='#821752'
             reviewSize={20}
             reviews={["Strongly Disgree", "Disagree", "Neutral", "Agree", "Strongly Agree"]}
-            defaultRating={3}
+            defaultRating={myUserHobbies[3]}
             onFinishRating={(rate) => {
               updateRatingsByIndex(rate, 3)
             }}

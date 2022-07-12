@@ -31,7 +31,11 @@ export default function InputInfoScreen({ navigation }) {
   }, [isFocused]);
 
   return (myUserData 
-    ? <EditProfile myUserYear={myUserData.year} myUserType = {myUserData.personalityType} myUserMods={myUserData.modules.split(', ')} navigation={navigation}/>
+    ? <EditProfile myUserYear={myUserData.year} 
+                   myUserType = {myUserData.personalityType} 
+                   myUserMods={myUserData.modules.split(', ')} 
+                   myUserHobbies={myUserData.hobbies.split(', ')} 
+                   navigation={navigation} />
     : <View style={styles.container}>
         <ImageBackground source={require('../assets/images/3dotsloading.gif')} style={styles.image}/>
       </View>)
