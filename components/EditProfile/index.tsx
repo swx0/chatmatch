@@ -55,7 +55,7 @@ export default function EditProfile({ myUserYear, myUserType, myUserMods, myUser
               options={yearList}
               value={userYear}
               onChange={(val) => setuserYear(val)}
-              hideInputFilter={false}
+              hideInputFilter={true}
               width="90%"
               listOptionProps={{ nestedScrollEnabled: true }}
             />

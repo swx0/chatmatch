@@ -12,12 +12,19 @@ import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import SwitchSelector from 'react-native-switch-selector';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { Picker } from '@react-native-picker/picker'
 
 export default function MatchList ({ myUser, userList, navigation }) {
     
     const [myUserData, setMyUserData] = useState(null);
     const [config, setConfig] = useState("Default");
     const [refreshing, setRefreshing] = useState(false);
+    const [sortState, setSortState] = useState("none");
+    const sortMethods = {
+        'none': { method: (a, b) => null},
+        'name': { method: (a, b) => a.name < b.name ? -1 : 1}
+    };
+    const sort = [{value: 'none'}, {value: 'name'}];
     const onRefresh = useCallback(async () => {
       setRefreshing(true);
       // insert retrieving of db here
@@ -52,6 +59,8 @@ export default function MatchList ({ myUser, userList, navigation }) {
 
     // Generate list of all other users, excluding logged in user
     const otherUserList = userList.filter(x => x.id !== myUserData.data.getUser.id);
+    console.log('\n\n\n\n\n\n\n') //for testing purposes only-------------------------------------------------------------------------------------------------------------------------
+    console.log(otherUserList.sort(sortMethods[sortState].method));
 
     const onPress = async (otherID, otherName) => {
 
@@ -103,24 +112,37 @@ export default function MatchList ({ myUser, userList, navigation }) {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
 			<View style={styles.container}>
-            <SwitchSelector
-                hasPadding
-                fontSize={13}
-                borderRadius={5}
-                buttonColor='#821752'
-                options={switchOptions}
-                initial={1}
-                onPress={value => {
-                    setConfig(value);
-                    showMessage({
-                        message: "Selected " + value + " configuration",
-                        type: "success",
-                      });
-                }}
-                style={{marginLeft:20, marginRight:150, marginTop:12}}
-                />
+                <View style={{flexDirection: 'row'}}>
+                <SwitchSelector
+                    hasPadding
+                    fontSize={13}
+                    borderRadius={5}
+                    buttonColor='#821752'
+                    options={switchOptions}
+                    initial={1}
+                    onPress={value => {
+                        setConfig(value);
+                        showMessage({
+                            message: "Selected " + value + " configuration",
+                            type: "success",
+                        });
+                    }}
+                    style={{marginLeft:20, marginRight: 20, marginTop:12, flex: 1}}
+                    />
+                <Picker
+                    style={{width: '40%', marginTop: 2}}
+                    selectedValue={sortState}
+                    onValueChange={(value, index) => setSortState(value)}
+                    prompt='Sort by'
+                    mode='dialog'>
+                    <Picker.Item label="Default" value="none"/>
+                    <Picker.Item label="Name" value="name"/>
+                    <Picker.Item label="Best Match (currently not available)" value="bestmatch" enabled={false}/>
+
+                </Picker>
+                </View>
                 {
-                    otherUserList.map((item) => {
+                    otherUserList.sort(sortMethods[sortState].method).map((item) => {
                         const otherModsString = item.modules;
                         const otherMods = otherModsString.split(', ');
                         const otherHobbiesString = item.hobbies;
