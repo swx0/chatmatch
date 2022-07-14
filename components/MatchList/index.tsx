@@ -12,7 +12,8 @@ import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations'
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import SwitchSelector from 'react-native-switch-selector';
 import { showMessage, hideMessage } from "react-native-flash-message";
-import { Picker } from '@react-native-picker/picker'
+import { Dropdown } from 'react-native-element-dropdown'
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function MatchList ({ myUser, userList, navigation }) {
     
@@ -24,7 +25,8 @@ export default function MatchList ({ myUser, userList, navigation }) {
         'none': { method: (a, b) => null},
         'name': { method: (a, b) => a.name < b.name ? -1 : 1}
     };
-    const sort = [{value: 'none'}, {value: 'name'}];
+    const sort = [{ label: 'Default', value: 'none'}, { label: 'Name', value: 'name'}];
+
     const onRefresh = useCallback(async () => {
       setRefreshing(true);
       // insert retrieving of db here
@@ -59,9 +61,6 @@ export default function MatchList ({ myUser, userList, navigation }) {
 
     // Generate list of all other users, excluding logged in user
     const otherUserList = userList.filter(x => x.id !== myUserData.data.getUser.id);
-    console.log('\n\n\n\n\n\n\n') //for testing purposes only-------------------------------------------------------------------------------------------------------------------------
-    console.log(otherUserList.sort(sortMethods[sortState].method));
-
     const onPress = async (otherID, otherName) => {
 
     // Check if a ChatRoom with these 2 users already exists
@@ -112,7 +111,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         >
 			<View style={styles.container}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <SwitchSelector
                     hasPadding
                     fontSize={13}
@@ -127,19 +126,20 @@ export default function MatchList ({ myUser, userList, navigation }) {
                             type: "success",
                         });
                     }}
-                    style={{marginLeft:20, marginRight: 20, marginTop:12, flex: 1}}
+                    style={{ marginTop: 12, width: 200, paddingLeft: 15,}}
                     />
-                <Picker
-                    style={{width: '40%', marginTop: 2}}
-                    selectedValue={sortState}
-                    onValueChange={(value, index) => setSortState(value)}
-                    prompt='Sort by'
-                    mode='dialog'>
-                    <Picker.Item label="Default" value="none"/>
-                    <Picker.Item label="Name" value="name"/>
-                    <Picker.Item label="Best Match (currently not available)" value="bestmatch" enabled={false}/>
-
-                </Picker>
+                    <Dropdown
+                        style={{width: 99, paddingTop: 13, marginRight: 5,}}
+                        selectedTextStyle={{color: 'white', fontSize: 15}}
+                        placeholder={sortState}
+                        data={sort}
+                        value={sortState}
+                        labelField='label'
+                        valueField='value'
+                        onChange={item => setSortState(item.value)}
+                        renderRightIcon={() => null}
+                        renderLeftIcon={() => (<MaterialIcons name="sort" size={24} color="white" />)}
+                    />
                 </View>
                 {
                     otherUserList.sort(sortMethods[sortState].method).map((item) => {
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 	flexDirection: 'column',
 	padding: 0,
     backgroundColor: Colors.light.tint,
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center'
   },
   outer: {
