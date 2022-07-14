@@ -28,7 +28,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
         'name': { method: (a, b) => a.name < b.name ? -1 : 1},
         'overall': { method: (a,b) => { const r1 = allInOne(currentUser, a); 
                                         const r2 = allInOne(currentUser, b);
-                                        return r2.total - r1.total;}},
+                                        return r2.total - r1.total;}},          // got some bug where if personality-heavy config is selected, bryan, ben and james isn't sorted correctly
         'type': { method: (a,b) => {    const r1 = allInOne(currentUser, a); 
                                         const r2 = allInOne(currentUser, b);
                                         return r2.typeMatch - r1.typeMatch;}},
