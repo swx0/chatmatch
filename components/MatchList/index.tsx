@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { RefreshControl, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { ScrollView, TouchableOpacity } from 'react-native';
-import { matchByType, matchByMods, totalMatch, matchByHobbies } from '../../matchBy';
+import { allInOne } from '../../matchBy';
 import { Card } from 'react-native-elements'
 import { API, graphqlOperation } from 'aws-amplify';
 import { getUser } from '../../src/graphql/queries';
@@ -20,12 +20,27 @@ export default function MatchList ({ myUser, userList, navigation }) {
     const [myUserData, setMyUserData] = useState(null);
     const [config, setConfig] = useState("Default");
     const [refreshing, setRefreshing] = useState(false);
+
+    // Stuff needed for sorting
     const [sortState, setSortState] = useState("none");
     const sortMethods = {
         'none': { method: (a, b) => null},
-        'name': { method: (a, b) => a.name < b.name ? -1 : 1}
+        'name': { method: (a, b) => a.name < b.name ? -1 : 1},
+        'overall': { method: (a,b) => { const r1 = allInOne(currentUser, a); 
+                                        const r2 = allInOne(currentUser, b);
+                                        return r2.total - r1.total;}},
+        'type': { method: (a,b) => {    const r1 = allInOne(currentUser, a); 
+                                        const r2 = allInOne(currentUser, b);
+                                        return r2.typeMatch - r1.typeMatch;}},
     };
-    const sort = [{ label: 'Default', value: 'none'}, { label: 'Name', value: 'name'}];
+    const sort = [
+            { label: 'Default', value: 'none'},
+            { label: 'Name', value: 'name'},
+            { label: 'Overall', value: 'overall'},
+            { label: 'Type', value: 'type'}
+        ];
+
+
 
     const onRefresh = useCallback(async () => {
       setRefreshing(true);
@@ -52,13 +67,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
         return null;
     }
 
-
-    const myType = myUserData.data.getUser.personalityType;
-    const myModsString = myUserData.data.getUser.modules;
-    const myMods = myModsString.split(', ');
-    const myHobbiesString = myUserData.data.getUser.hobbies;
-    const myHobbies = myHobbiesString.split(', ');
-
+    const currentUser = userList.filter(x => x.id == myUserData.data.getUser.id)[0];
     // Generate list of all other users, excluding logged in user
     const otherUserList = userList.filter(x => x.id !== myUserData.data.getUser.id);
     const onPress = async (otherID, otherName) => {
@@ -103,6 +112,8 @@ export default function MatchList ({ myUser, userList, navigation }) {
     navigation.navigate('ChatRoom', { id: newChatRoomID, name: otherName});
     
     };
+
+    console.log(otherUserList);
     
     return (
     <SafeAreaView>
@@ -143,14 +154,10 @@ export default function MatchList ({ myUser, userList, navigation }) {
                 </View>
                 {
                     otherUserList.sort(sortMethods[sortState].method).map((item) => {
-                        const otherModsString = item.modules;
-                        const otherMods = otherModsString.split(', ');
-                        const otherHobbiesString = item.hobbies;
-                        const otherHobbies = otherHobbiesString.split(', ');
-                        const typeMatch = matchByType(myType, item.personalityType);
-                        const modMatch = matchByMods(myMods, otherMods);
-                        const hobbiesMatch = matchByHobbies(myHobbies, otherHobbies);
-                        const total = totalMatch(typeMatch, modMatch, myMods.length, otherMods.length, hobbiesMatch, config);
+                        const results = allInOne(currentUser, item, config);
+                        const typeMatch = results.typeMatch;
+                        const modMatch = results.modMatch;
+                        const total = results.total;
                         return (<TouchableOpacity style={styles.card} key={item.id} onPress={() => onPress(item.id, item.name)}>
                                     <View>
                                         <Card containerStyle={{borderRadius:10}}>
@@ -173,7 +180,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                                                 )
                                                             }
                                                         </AnimatedCircularProgress>
-                                                        <Text style={{color: 'darkslategrey', }}>Type Compatibility</Text>
+                                                        <Text style={{color: 'darkslategrey', paddingTop: 5}}>Type Compatibility</Text>
                                                     </View>
 
                                                     <View>
@@ -191,7 +198,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                                                 )
                                                             }
                                                         </AnimatedCircularProgress>
-                                                        <Text style={{color: 'darkslategrey', fontWeight: "bold", paddingLeft: 3}}>Overall Match</Text>
+                                                        <Text style={{color: 'darkslategrey', fontWeight: "bold", paddingLeft: 3, paddingTop: 5}}>Overall Match</Text>
                                                     </View>
                                                 </View>
                                             </View>
