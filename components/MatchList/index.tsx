@@ -157,42 +157,42 @@ export default function MatchList ({ myUser, userList, navigation }) {
                                             <View style={{alignItems: 'stretch'}}>
                                                 <Text style={{textTransform: 'capitalize', fontWeight: "bold"}}>{item.name}</Text>     
                                                 <Text style={{color: 'lightslategrey'}}>Modules matched: {modMatch}</Text>
-                                                <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
-                                                    <AnimatedCircularProgress
-                                                        size={100}
-                                                        style={{marginTop:-25}}
-                                                        width={15}
-                                                        arcSweepAngle={135}
-                                                        fill={typeMatch}
-                                                        tintColor='#821752'
-                                                        backgroundColor="#3d5875">
-                                                        {
-                                                            (fill) => (
-                                                                <Text>{typeMatch}%</Text>
-                                                            )
-                                                        }
-                                                    </AnimatedCircularProgress>
+                                                <View style={{flexDirection: 'row', justifyContent:'space-around', }}>
+                                                    <View>
+                                                        <AnimatedCircularProgress
+                                                            size={100}
+                                                            style={{marginTop:-25, marginLeft: 10}}
+                                                            width={15}
+                                                            arcSweepAngle={135}
+                                                            fill={typeMatch}
+                                                            tintColor='#821752'
+                                                            backgroundColor="#3d5875">
+                                                            {
+                                                                (fill) => (
+                                                                    <Text>{typeMatch}%</Text>
+                                                                )
+                                                            }
+                                                        </AnimatedCircularProgress>
+                                                        <Text style={{color: 'darkslategrey', }}>Type Compatibility</Text>
+                                                    </View>
 
-                                                    
-
-                                                    <AnimatedCircularProgress
-                                                        size={100}
-                                                        style={{marginTop:-25}}
-                                                        width={20}
-                                                        arcSweepAngle={135}
-                                                        fill={Math.round(total)}
-                                                        tintColor='#821752'
-                                                        backgroundColor="#3d5875">
-                                                        {
-                                                            (fill) => (
-                                                                <Text style={{color: 'darkslategrey'}}>{total.toFixed(1)}%</Text>
-                                                            )
-                                                        }
-                                                    </AnimatedCircularProgress>
-                                                </View>
-                                                <View style={{flexDirection: 'row'}}>
-                                                    <Text style={{color: 'darkslategrey', marginLeft:25}}>Type Compatibility</Text>
-                                                    <Text style={{color: 'darkslategrey', marginLeft:65, fontWeight: "bold"}}>Overall Match</Text>
+                                                    <View>
+                                                        <AnimatedCircularProgress
+                                                            size={100}
+                                                            style={{marginTop:-25}}
+                                                            width={20}
+                                                            arcSweepAngle={135}
+                                                            fill={Math.round(total)}
+                                                            tintColor='#821752'
+                                                            backgroundColor="#3d5875">
+                                                            {
+                                                                (fill) => (
+                                                                    <Text style={{color: 'darkslategrey'}}>{total.toFixed(1)}%</Text>
+                                                                )
+                                                            }
+                                                        </AnimatedCircularProgress>
+                                                        <Text style={{color: 'darkslategrey', fontWeight: "bold", paddingLeft: 3}}>Overall Match</Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                         </Card>
