@@ -26,14 +26,18 @@ export default function MatchList ({ myUser, userList, navigation }) {
     const sortMethods = {
         'none': { method: (a, b) => null},
         'name': { method: (a, b) => a.name < b.name ? -1 : 1},
-        'overall': { method: (a,b) => { const r1 = allInOne(currentUser, a); 
-                                        const r2 = allInOne(currentUser, b);
-                                        return r2.total - r1.total;}},          // got some bug where if personality-heavy config is selected, bryan, ben and james isn't sorted correctly
-        'type': { method: (a,b) => {    const r1 = allInOne(currentUser, a); 
-                                        const r2 = allInOne(currentUser, b);
-                                        return r2.typeMatch - r1.typeMatch;}},
+        'overall': { method: (a,b) => {
+            const r1 = allInOne(currentUser, a, config); 
+            const r2 = allInOne(currentUser, b, config);
+            return r2.total - r1.total;}
+        },
+        'type': { method: (a,b) => {
+            const r1 = allInOne(currentUser, a, config); 
+            const r2 = allInOne(currentUser, b, config);
+            return r2.typeMatch - r1.typeMatch;}
+        },
     };
-    const sort = [
+    const sortOptions = [
             { label: 'Default', value: 'none'},
             { label: 'Name', value: 'name'},
             { label: 'Overall', value: 'overall'},
@@ -41,10 +45,10 @@ export default function MatchList ({ myUser, userList, navigation }) {
         ];
 
 
-
     const onRefresh = useCallback(async () => {
       setRefreshing(true);
       // insert retrieving of db here
+      console.log('\nrefreshing...');
       setTimeout(() => { setRefreshing(false) }, 2000);
     }, [refreshing]);
 
@@ -112,8 +116,6 @@ export default function MatchList ({ myUser, userList, navigation }) {
     navigation.navigate('ChatRoom', { id: newChatRoomID, name: otherName});
     
     };
-
-    console.log(otherUserList);
     
     return (
     <SafeAreaView>
@@ -140,10 +142,10 @@ export default function MatchList ({ myUser, userList, navigation }) {
                     style={{ marginTop: 12, width: 200, paddingLeft: 15,}}
                     />
                     <Dropdown
-                        style={{width: 99, paddingTop: 13, marginRight: 5,}}
+                        style={{ width: 99, paddingTop: 13, marginRight: 2 }}
                         selectedTextStyle={{color: 'white', fontSize: 15}}
                         placeholder={sortState}
-                        data={sort}
+                        data={sortOptions}
                         value={sortState}
                         labelField='label'
                         valueField='value'
