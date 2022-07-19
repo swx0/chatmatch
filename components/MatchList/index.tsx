@@ -56,7 +56,7 @@ export default function MatchList ({ myUser, userList, navigation }) {
     const switchOptions = [
         { label: "", value: "Module-heavy", imageIcon: require('../../assets/images/module.png')},
         { label: "", value: "Default", imageIcon: require('../../assets/images/default2.png') },
-        { label: "", value: "Personality-heavy", imageIcon: require('../../assets/images/personality.png') }
+        { label: "", value: "Personality-heavy", imageIcon: require('../../assets/images/humanhead.png') }
       ];
 
     useEffect(() => {
