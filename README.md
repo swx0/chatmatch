@@ -1,2 +1,2 @@
 # matchmaking-app
-Orbital Project 2022 - Apollo 11
+NUS Orbital Project 2022 - Apollo 11
