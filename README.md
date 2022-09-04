@@ -7,7 +7,7 @@ A real-time Android chat application to match students based on Personality type
 
 ## Full Documentation
 
-The documentation here contains the full description of all features (including implementation details), as well as testing results & qualitative evaluation.
+The documentation [here](https://github.com/swx0/chatmatch/blob/main/MS3_README%20git.pdf) contains the full description of all features (including implementation details), as well as testing results & qualitative evaluation.
 
 ## Architecture
 <img src="https://user-images.githubusercontent.com/76123658/188313430-51960084-4c40-42ec-8b34-32812dd1b85f.png" width=60% height=60%>
