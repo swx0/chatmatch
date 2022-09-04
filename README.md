@@ -5,7 +5,7 @@
 A real-time Android chat application to match students based on Personality type, Common modules & Hobbies. 
 </p>
 <p align="center">
-Using React Native for frontend & AWS for scalable backend
+Using React Native for frontend & AWS for scalable backend.
 </p>
 
 ## Full Documentation
