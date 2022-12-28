@@ -1,7 +1,4 @@
 <p align="center">
-<img src="https://user-images.githubusercontent.com/76123658/188312963-bdc0a3a8-0972-4e47-951d-8b4103afa1c0.png" width=40% height=40%>
-</p>
-<p align="center">
 A real-time Android chat application to match students based on Personality type, Common modules & Hobbies. 
 </p>
 <p align="center">
